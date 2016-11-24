@@ -1,11 +1,11 @@
-package com.chenbing.oneweather.View;
+package com.chenbing.oneweather.View.activitys;
 
 import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainActivityView {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +15,7 @@ public class MainActivity extends BaseActivity {
 
   @Override
   protected void initData() {
+
 
   }
 

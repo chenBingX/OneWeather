@@ -19,16 +19,27 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
-        release {
+        debug {
+            debuggable true
+            zipAlignEnabled false
+            shrinkResources false
             minifyEnabled false
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true //是否启用zipAlign压缩优化
+            shrinkResources true //是否删除未被使用的资源文件
+//            signingConfig signingConfigs.icekey //签名文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

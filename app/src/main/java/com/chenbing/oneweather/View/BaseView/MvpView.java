@@ -7,5 +7,5 @@ package com.chenbing.oneweather.View.BaseView;
  * Notes:
  */
 
-public class MvpView {
+public interface MvpView {
 }
