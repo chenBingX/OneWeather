@@ -11,19 +11,23 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
+
+import com.chenbing.oneweather.BuildConfig;
+import com.chenbing.oneweather.ChiceApplication;
+
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.PowerManager;
+import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
-
-import com.chenbing.oneweather.ChiceApplication;
 
 /**
  * Project Name:AnimDveDemo
@@ -32,6 +36,11 @@ import com.chenbing.oneweather.ChiceApplication;
  * Notes:
  */
 public class AppUtils {
+
+  private static String versionName = null;
+  private static int versionCode = 0;
+  private static String deviceId = null;
+  private static String deviceMAC = null;
 
   public static final String ObjectToBase64String(Object object) throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -231,5 +240,72 @@ public class AppUtils {
     return "";
   }
 
+  /**
+   * 获得手机Imei
+   */
+  public static String getImei(Context context) {
+    try {
+      TelephonyManager telephonyManager = (TelephonyManager) context
+        .getSystemService(Context.TELEPHONY_SERVICE);
+      return telephonyManager.getDeviceId();
+    } catch (Exception e) {
+      // In some devices, we are not able to get device id, and may cause some exception,
+      // so catch it.
+      return "";
+    }
+  }
 
+  /**
+   * 获得手机Imsi
+   */
+  public static String getImsi(Context context) {
+    try {
+      TelephonyManager telephonyManager = (TelephonyManager) context
+        .getSystemService(Context.TELEPHONY_SERVICE);
+      return telephonyManager.getSubscriberId();
+    } catch (Exception e) {
+      // In some devices, we are not able to get device id, and may cause some exception,
+      // so catch it.
+      return "";
+    }
+  }
+
+  public static String getVersionName(Context context) {
+    if (versionName == null) {
+      PackageInfo packageInfo = getPackageInfo(context, context.getPackageName(), 0);
+      if (packageInfo != null) {
+        versionName = packageInfo.versionName;
+      } else {
+        versionName = "";
+      }
+
+    }
+    return versionName;
+  }
+
+  public static PackageInfo getPackageInfo(Context context, String packageName, int flag) {
+    PackageManager packageManager = context.getPackageManager();
+    PackageInfo packageInfo = null;
+    try {
+      packageInfo = packageManager.getPackageInfo(packageName, flag);
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+    } catch (RuntimeException e) {
+      // In some ROM, there will be a PackageManager has died exception. So we catch it here.
+      e.printStackTrace();
+    }
+    return packageInfo;
+  }
+
+  public static String getSdkVersion() {
+    return String.valueOf(Build.VERSION.SDK_INT);
+  }
+
+  public static String getChannelName() {
+    return BuildConfig.FLAVOR;
+  }
+
+  public static String getModelVersion() {
+    return Build.MODEL;
+  }
 }
