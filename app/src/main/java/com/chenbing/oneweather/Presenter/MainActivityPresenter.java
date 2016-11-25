@@ -1,5 +1,9 @@
 package com.chenbing.oneweather.Presenter;
 
+import com.chenbing.oneweather.Model.MainActivityModel;
+import com.chenbing.oneweather.Model.MainActivityModelApi;
+import com.chenbing.oneweather.View.activitys.MainActivityView;
+
 /**
  * Project Name:OneWeather
  * Author:IceChen
@@ -8,4 +12,12 @@ package com.chenbing.oneweather.Presenter;
  */
 
 public class MainActivityPresenter implements MainActivityPresenterApi {
+
+  private MainActivityView view;
+  private MainActivityModelApi model;
+
+  public MainActivityPresenter(MainActivityView view) {
+    this.view = view;
+    model = new MainActivityModel();
+  }
 }

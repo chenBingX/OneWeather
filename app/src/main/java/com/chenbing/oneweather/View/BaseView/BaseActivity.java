@@ -1,5 +1,4 @@
 package com.chenbing.oneweather.View.BaseView;
-
 import android.support.v7.app.AppCompatActivity;
 
 /**

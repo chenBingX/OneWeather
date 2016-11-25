@@ -3,6 +3,8 @@ package com.chenbing.oneweather;
 import android.app.Application;
 import android.content.Context;
 
+import com.chenbing.oneweather.Utils.CrashHandler;
+
 /**
  * Project Name:OneWeather
  * Author:IceChen
@@ -17,8 +19,8 @@ public class ChiceApplication extends Application {
   public void onCreate() {
     super.onCreate();
     context = this;
-    //初始化异常处理类
-//    CrashHandler.getInstance().init(context);
+//    初始化异常处理类
+    CrashHandler.getInstance().init(context);
   }
 
   public static Context getAppContext(){

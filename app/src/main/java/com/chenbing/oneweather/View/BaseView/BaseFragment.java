@@ -12,12 +12,17 @@ import android.view.View;
  * Notes:
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
+
+  abstract protected void initData();
+
+  abstract protected void initView();
+
+  abstract protected void addListener();
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     view.setClickable(true);
   }
-
 }
