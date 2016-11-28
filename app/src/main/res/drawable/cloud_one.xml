@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:viewportWidth="64"
+        android:viewportHeight="38"
+        android:width="64dp"
+        android:height="38dp">
+  <group android:name="Cloud" android:translateY="1" android:translateX="1">
+    <path
+      android:pathData="M14.7,8.9 C17.6,3.6 23.3,0 29.8,0 C39.3,0 47,7.6 47,17.1 C47,18.4 46.8,19.7 46.6,20.9"
+      android:strokeWidth="2" android:name="Shape" android:fillColor="#00000000"
+      android:strokeColor="#6B6C6E" android:fillType="evenOdd"/>
+    <path
+      android:pathData="M47.4,14.5 C48.5,14.1 49.7,14 50.9,14 C57,14 62,18.9 62,25 C62,31.1 57,36 50.9,36 L13.6,36 C6.1,36 0,29.9 0,22.5 C0,15 6.1,9 13.6,9 C17.1,9 20.3,10.3 22.7,12.4"
+      android:strokeWidth="2" android:name="Shape" android:fillColor="#00000000"
+      android:strokeColor="#6B6C6E" android:fillType="evenOdd"/>
+  </group>
+</vector>

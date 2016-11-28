@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">OneWeather</string>
+  <string name="app_name">One Weather</string>
+  <string name="join_now">立即进入</string>
 </resources>
