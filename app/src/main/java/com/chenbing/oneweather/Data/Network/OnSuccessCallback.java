@@ -1,6 +1,5 @@
 package com.chenbing.oneweather.Data.Network;
 
-import android.support.annotation.NonNull;
 
 /**
  * Project Name:OneWeather
@@ -10,5 +9,5 @@ import android.support.annotation.NonNull;
  */
 
 public interface OnSuccessCallback<T> {
-  void onSuccess(@NonNull T t);
+  void onSuccess(T t);
 }

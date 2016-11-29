@@ -29,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
   public static final Api api;
+  private static String BASE_WEATHER_URL = "http://op.juhe.cn/";
 
   static {
     api = getRetrofit().create(Api.class);
@@ -38,12 +39,12 @@ public class NetworkClient {
     OkHttpClient client = getClient();
     GsonConverterFactory gsonConverterFactory =
         GsonConverterFactory.create(GsonUtils.newInstance());
-    Retrofit retrofit = new Retrofit.Builder()
+    return new Retrofit.Builder()
+        .baseUrl(BASE_WEATHER_URL)
         .addConverterFactory(gsonConverterFactory)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .client(client)
         .build();
-    return retrofit;
   }
 
   @NonNull
@@ -68,16 +69,23 @@ public class NetworkClient {
     Request.Builder rq = request.newBuilder();
     if (ChiceApplication.getAppContext() != null) {
       String imei = AppUtils.getImei(ChiceApplication.getAppContext());
-      rq.addHeader("imei", imei);
-      LogUtils.v("imei: " + imei);
+      if (imei != null) {
+        rq.addHeader("imei", imei);
+        LogUtils.v("imei: " + imei);
+      }
 
       String imsi = AppUtils.getImsi(ChiceApplication.getAppContext());
-      rq.addHeader("imsi", imsi);
-      LogUtils.v("imsi: " + imsi);
+      if (imsi != null) {
+        rq.addHeader("imsi", imsi);
+        LogUtils.v("imsi: " + imsi);
+      }
 
       String networkType = NetworkUtils.getCurrentNetworkType(ChiceApplication.getAppContext());
-      rq.addHeader("net", networkType);
-      LogUtils.e("net: " + networkType);
+      if (networkType != null) {
+        rq.addHeader("net", networkType);
+        LogUtils.e("net: " + networkType);
+      }
+
     }
     String sdk = AppUtils.getSdkVersion();
     rq.addHeader("cv", sdk);
@@ -97,29 +105,32 @@ public class NetworkClient {
     return rq.build();
   }
 
-  public static void getWeatherData(OnSuccessCallback onSuccessCallback,
-      OnFailureCallback onFailureCallback) {
-    requestData(api.getWeatherData(), onSuccessCallback, onFailureCallback);
+  public static void getWeatherData(OnSuccessCallback<Result> onSuccessCallback,
+      OnFailureCallback<Result> onFailureCallback) {
+    requestData(api.getWeatherData("北京", "3b8c8c784b4b439701fc34522213884f"), onSuccessCallback,
+        onFailureCallback);
   }
 
-  private static void requestData(Call<BaseResponse> call, OnSuccessCallback onSuccessCallback,
-      OnFailureCallback onFailureCallback) {
-    call.enqueue(new Callback<BaseResponse>() {
+  private static <T> void requestData(Call<BaseWeatherResponse<T>> call,
+      OnSuccessCallback<T> onSuccessCallback,
+      OnFailureCallback<T> onFailureCallback) {
+    call.enqueue(new Callback<BaseWeatherResponse<T>>() {
       @Override
-      public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+      public void onResponse(Call<BaseWeatherResponse<T>> call, Response<BaseWeatherResponse<T>> response) {
         if (response.isSuccessful() && response.body() != null) {
-
-
-
+          LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(response.body()));
+          if (onSuccessCallback != null) {
+            onSuccessCallback.onSuccess(response.body().getResult());
+          }
         }
       }
 
       @Override
-      public void onFailure(Call<BaseResponse> call, Throwable t) {
-
+      public void onFailure(Call<BaseWeatherResponse<T>> call, Throwable t) {
       }
     });
   }
+
 
 
 }

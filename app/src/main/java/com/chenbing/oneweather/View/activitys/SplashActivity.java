@@ -1,11 +1,12 @@
 package com.chenbing.oneweather.View.activitys;
 
 import com.chenbing.oneweather.R;
+import com.chenbing.oneweather.Data.Network.NetworkClient;
 import com.chenbing.oneweather.Utils.DisplayUtils;
+import com.chenbing.oneweather.Utils.GsonUtils;
+import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,10 +34,7 @@ public class SplashActivity extends BaseActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-
     super.onCreate(savedInstanceState);
-    // getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-    // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_splash);
     ButterKnife.bind(this);
     initData();
@@ -46,6 +44,12 @@ public class SplashActivity extends BaseActivity {
 
   @Override
   protected void initData() {
+    LogUtils.e("开始请求");
+    NetworkClient.getWeatherData(t -> {
+      LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(t));
+    }, asd -> {
+
+    });
 
   }
 
@@ -54,14 +58,25 @@ public class SplashActivity extends BaseActivity {
 
   @Override
   protected void addListener() {
+    playAnimOnLayoutFinish();
+    registerJoinNowListener();
+  }
+
+  private void playAnimOnLayoutFinish() {
+    // 需要在布局填充完成后才能获取到View的尺寸
     getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(
         new ViewTreeObserver.OnGlobalLayoutListener() {
           @Override
           public void onGlobalLayout() {
             playAnim();
+            // 需要移除监听，否则会重复触发
             getWindow().getDecorView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
           }
         });
+  }
+
+  private void registerJoinNowListener() {
+    joinNow.setOnClickListener(v -> jumpToMainActivity());
   }
 
   private void playAnim() {
@@ -132,20 +147,10 @@ public class SplashActivity extends BaseActivity {
 
   private void playJoinNowAnim() {
     ObjectAnimator anim = ObjectAnimator.ofFloat(joinNow, "alpha", 0f, 1f);
-    anim.setDuration(3000);
-    anim.addListener(new AnimatorListenerAdapter() {
-      @Override
-      public void onAnimationEnd(Animator animation) {
-        registerJoinNowListener();
-      }
-    });
+    anim.setDuration(2000);
+    anim.setRepeatCount(ObjectAnimator.INFINITE);
+    anim.setRepeatMode(ObjectAnimator.REVERSE);
     anim.start();
-  }
-
-  private void registerJoinNowListener() {
-    joinNow.setOnClickListener(v -> {
-      jumpToMainActivity();
-    });
   }
 
   private void jumpToMainActivity() {
