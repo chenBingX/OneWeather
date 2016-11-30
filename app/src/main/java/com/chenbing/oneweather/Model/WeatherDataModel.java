@@ -50,4 +50,6 @@ public class WeatherDataModel implements WeatherDataModelApi {
   public void setRequestWeatherDataListener(RequestWeatherDataListener requestWeatherDataListener) {
     this.requestWeatherDataListener = requestWeatherDataListener;
   }
+
+
 }

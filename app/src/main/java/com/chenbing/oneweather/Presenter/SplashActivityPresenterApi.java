@@ -7,9 +7,7 @@ package com.chenbing.oneweather.Presenter;
  * Notes:
  */
 
-public interface SplashActivityPresenterApi {
+public interface SplashActivityPresenterApi extends BasePresenter{
 
   void requestWeatherData();
-
-  void destroy();
 }

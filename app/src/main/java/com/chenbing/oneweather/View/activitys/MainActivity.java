@@ -1,5 +1,6 @@
 package com.chenbing.oneweather.View.activitys;
 
+import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Presenter.MainActivityPresenter;
 import com.chenbing.oneweather.Presenter.MainActivityPresenterApi;
@@ -34,5 +35,10 @@ public class MainActivity extends BaseActivity implements MainActivityView {
   @Override
   protected void addListener() {
 
+  }
+
+  @Override
+  protected BasePresenter getPresenter() {
+    return presenter;
   }
 }

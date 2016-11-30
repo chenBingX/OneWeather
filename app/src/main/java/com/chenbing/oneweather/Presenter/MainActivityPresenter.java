@@ -20,4 +20,9 @@ public class MainActivityPresenter implements MainActivityPresenterApi {
     this.view = view;
     model = new MainActivityModel();
   }
+
+  @Override
+  public void destroy() {
+
+  }
 }

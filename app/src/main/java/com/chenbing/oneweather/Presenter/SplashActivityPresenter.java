@@ -44,12 +44,10 @@ public class SplashActivityPresenter
     LogUtils.e("请求出错：" + message);
   }
 
-
   @Override
   public void destroy() {
-    view = null;
+    model.setRequestWeatherDataListener(null);
     model = null;
+    view = null;
   }
-
-
 }

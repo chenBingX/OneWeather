@@ -1,5 +1,6 @@
 package com.chenbing.oneweather.View.activitys;
 
+import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Presenter.SplashActivityPresenter;
 import com.chenbing.oneweather.Presenter.SplashActivityPresenterApi;
@@ -56,6 +57,11 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
   protected void addListener() {
     playAnimOnLayoutFinish();
     registerJoinNowListener();
+  }
+
+  @Override
+  protected BasePresenter getPresenter() {
+    return presenter;
   }
 
   private void playAnimOnLayoutFinish() {
@@ -155,9 +161,4 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
     finish();
   }
 
-  @Override
-  protected void onStop() {
-    super.onStop();
-    presenter.destroy();
-  }
 }
