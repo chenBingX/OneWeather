@@ -1,12 +1,13 @@
 package com.chenbing.oneweather.View.activitys;
 
 import com.chenbing.oneweather.R;
-import com.chenbing.oneweather.Data.Network.ApiClient;
+import com.chenbing.oneweather.Presenter.SplashActivityPresenter;
+import com.chenbing.oneweather.Presenter.SplashActivityPresenterApi;
 import com.chenbing.oneweather.Utils.DisplayUtils;
-import com.chenbing.oneweather.Utils.GsonUtils;
-import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements SplashActivityView {
 
   @BindView(R.id.sun)
   ImageView sun;
@@ -32,10 +33,13 @@ public class SplashActivity extends BaseActivity {
   @BindView(R.id.join_now)
   TextView joinNow;
 
+  private SplashActivityPresenterApi presenter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splash);
+    presenter = new SplashActivityPresenter(this);
     ButterKnife.bind(this);
     initData();
     initView();
@@ -44,12 +48,7 @@ public class SplashActivity extends BaseActivity {
 
   @Override
   protected void initData() {
-    ApiClient.getWeatherData(data -> {
-      LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(data));
-    }, thr -> {
-
-    });
-
+    presenter.requestWeatherData();
   }
 
   @Override

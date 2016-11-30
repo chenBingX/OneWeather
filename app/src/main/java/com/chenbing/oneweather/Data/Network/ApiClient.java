@@ -3,7 +3,7 @@ package com.chenbing.oneweather.Data.Network;
 import com.chenbing.oneweather.BuildConfig;
 import com.chenbing.oneweather.ChiceApplication;
 import com.chenbing.oneweather.Data.BaseWeatherResponse;
-import com.chenbing.oneweather.Data.Result;
+import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Utils.AppUtils;
 import com.chenbing.oneweather.Utils.GsonUtils;
 import com.chenbing.oneweather.Utils.LogUtils;
@@ -31,7 +31,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
   public static final Api api;
-  private static String BASE_WEATHER_URL = "http://op.juhe.cn/";
+  private static final String BASE_WEATHER_URL = "http://op.juhe.cn/";
+  private static final String JUHE_WEATHER_KEY = "3b8c8c784b4b439701fc34522213884f";
 
   static {
     api = getRetrofit().create(Api.class);
@@ -107,9 +108,9 @@ public class ApiClient {
     return rq.build();
   }
 
-  public static void getWeatherData(OnSuccessCallback<Result> onSuccessCallback,
-      OnFailureCallback<Result> onFailureCallback) {
-    requestData(api.getWeatherData("北京", "3b8c8c784b4b439701fc34522213884f"), onSuccessCallback,
+  public static void getWeatherData(String cityname, OnSuccessCallback<WeatherData> onSuccessCallback,
+      OnFailureCallback<WeatherData> onFailureCallback) {
+    requestData(api.getWeatherData(cityname, JUHE_WEATHER_KEY), onSuccessCallback,
         onFailureCallback);
   }
 
@@ -120,7 +121,6 @@ public class ApiClient {
       @Override
       public void onResponse(Call<BaseWeatherResponse<T>> call, Response<BaseWeatherResponse<T>> response) {
         if (response.isSuccessful() && response.body() != null) {
-          LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(response.body()));
           if (onSuccessCallback != null) {
             onSuccessCallback.onSuccess(response.body().getResult());
           }
@@ -129,6 +129,9 @@ public class ApiClient {
 
       @Override
       public void onFailure(Call<BaseWeatherResponse<T>> call, Throwable t) {
+        if (onFailureCallback != null) {
+          onFailureCallback.onFailure(t.getMessage());
+        }
       }
     });
   }

@@ -22,6 +22,12 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+
+    <meta-data
+      android:name="com.baidu.lbsapi.API_KEY"
+      android:value="c237R8mwqGO0ELPyTPdOiI43fizK4sYA"/>       <!--key:开发者申请的Key-->
+
+    <!--Activity-->
     <activity android:name=".View.activitys.MainActivity">
     </activity>
     <activity android:name=".View.activitys.SplashActivity"
@@ -33,5 +39,13 @@
       </intent-filter>
     </activity>
   </application>
+
+
+  <!--Service-->
+  <service
+    android:name="com.baidu.location.f"
+    android:enabled="true"
+    android:process=":remote">
+  </service>
 
 </manifest>

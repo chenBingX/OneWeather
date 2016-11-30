@@ -1,7 +1,7 @@
 package com.chenbing.oneweather.Data.Network;
 
 import com.chenbing.oneweather.Data.BaseWeatherResponse;
-import com.chenbing.oneweather.Data.Result;
+import com.chenbing.oneweather.Data.WeatherData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,6 +18,6 @@ public interface Api {
 
   // key = 3b8c8c784b4b439701fc34522213884f
   @GET("onebox/weather/query")
-  Call<BaseWeatherResponse<Result>> getWeatherData(@Query("cityname") String cityName, @Query("key") String key);
+  Call<BaseWeatherResponse<WeatherData>> getWeatherData(@Query("cityname") String cityName, @Query("key") String key);
 
 }

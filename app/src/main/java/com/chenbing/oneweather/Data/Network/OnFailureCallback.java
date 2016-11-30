@@ -10,5 +10,5 @@ import android.support.annotation.Nullable;
  */
 
 public interface OnFailureCallback<T> {
-  void onFailure(@Nullable T t);
+  void onFailure(@Nullable String message);
 }

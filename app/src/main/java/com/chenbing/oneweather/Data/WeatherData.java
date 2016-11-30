@@ -10,7 +10,7 @@ import java.util.List;
  * Notes:
  */
 
-public class Result implements Serializable {
+public class WeatherData implements Serializable {
   private static final long serialVersionUID = 5257079040142218177L;
   /**
    * pubdate : 2016-11-29
