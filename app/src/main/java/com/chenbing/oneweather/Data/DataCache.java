@@ -1,5 +1,7 @@
 package com.chenbing.oneweather.Data;
 
+import com.baidu.location.BDLocation;
+
 /**
  * Project Name:OneWeather
  * Author:IceChen
@@ -10,6 +12,7 @@ package com.chenbing.oneweather.Data;
 public class DataCache {
 
   private WeatherData weatherData;
+  private BDLocation currentLocation;
 
   private DataCache(){
 
@@ -20,14 +23,22 @@ public class DataCache {
   }
 
   private static class DataCacheHolder{
+
     private static final DataCache instance = new DataCache();
   }
-
   public WeatherData getWeatherData() {
     return weatherData;
   }
 
   public void setWeatherData(WeatherData weatherData) {
     this.weatherData = weatherData;
+  }
+
+  public BDLocation getCurrentLocation() {
+    return currentLocation;
+  }
+
+  public void setCurrentLocation(BDLocation currentLocation) {
+    this.currentLocation = currentLocation;
   }
 }

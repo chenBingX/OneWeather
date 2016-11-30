@@ -10,4 +10,6 @@ package com.chenbing.oneweather.Presenter;
 public interface SplashActivityPresenterApi {
 
   void requestWeatherData();
+
+  void destroy();
 }

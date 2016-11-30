@@ -42,6 +42,14 @@ public class SplashActivityPresenter
   @Override
   public void onRequestWeatherDataFailure(String message) {
     LogUtils.e("请求出错：" + message);
-
   }
+
+
+  @Override
+  public void destroy() {
+    view = null;
+    model = null;
+  }
+
+
 }

@@ -1,5 +1,6 @@
 package com.chenbing.oneweather.Model;
 
+import com.chenbing.oneweather.Data.DataCache;
 import com.chenbing.oneweather.Data.Network.ApiClient;
 import com.chenbing.oneweather.Utils.GsonUtils;
 import com.chenbing.oneweather.Utils.LogUtils;
@@ -27,6 +28,8 @@ public class WeatherDataModel implements WeatherDataModelApi {
       if (cityname != null) {
         getWeatherData(cityname);
       }
+
+      DataCache.getInstance().setCurrentLocation(location); //缓存定位信息
     });
   }
 

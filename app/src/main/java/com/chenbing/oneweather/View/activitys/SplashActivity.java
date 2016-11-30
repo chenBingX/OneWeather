@@ -6,8 +6,6 @@ import com.chenbing.oneweather.Presenter.SplashActivityPresenterApi;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -155,5 +153,11 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
     Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
     finish();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    presenter.destroy();
   }
 }
