@@ -23,7 +23,6 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity android:name=".View.activitys.MainActivity">
-
     </activity>
     <activity android:name=".View.activitys.SplashActivity"
       android:theme="@style/FullScreen">

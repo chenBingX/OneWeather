@@ -2,6 +2,8 @@ package com.chenbing.oneweather.Data.Network;
 
 import com.chenbing.oneweather.BuildConfig;
 import com.chenbing.oneweather.ChiceApplication;
+import com.chenbing.oneweather.Data.BaseWeatherResponse;
+import com.chenbing.oneweather.Data.Result;
 import com.chenbing.oneweather.Utils.AppUtils;
 import com.chenbing.oneweather.Utils.GsonUtils;
 import com.chenbing.oneweather.Utils.LogUtils;
@@ -27,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Notes:
  */
 
-public class NetworkClient {
+public class ApiClient {
   public static final Api api;
   private static String BASE_WEATHER_URL = "http://op.juhe.cn/";
 
@@ -130,7 +132,4 @@ public class NetworkClient {
       }
     });
   }
-
-
-
 }

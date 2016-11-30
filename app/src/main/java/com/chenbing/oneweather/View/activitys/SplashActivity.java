@@ -1,7 +1,7 @@
 package com.chenbing.oneweather.View.activitys;
 
 import com.chenbing.oneweather.R;
-import com.chenbing.oneweather.Data.Network.NetworkClient;
+import com.chenbing.oneweather.Data.Network.ApiClient;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.Utils.GsonUtils;
 import com.chenbing.oneweather.Utils.LogUtils;
@@ -44,10 +44,9 @@ public class SplashActivity extends BaseActivity {
 
   @Override
   protected void initData() {
-    LogUtils.e("开始请求");
-    NetworkClient.getWeatherData(t -> {
-      LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(t));
-    }, asd -> {
+    ApiClient.getWeatherData(data -> {
+      LogUtils.e("结果 = " + GsonUtils.getSingleInstance().toJson(data));
+    }, thr -> {
 
     });
 
@@ -146,7 +145,7 @@ public class SplashActivity extends BaseActivity {
   }
 
   private void playJoinNowAnim() {
-    ObjectAnimator anim = ObjectAnimator.ofFloat(joinNow, "alpha", 0f, 1f);
+    ObjectAnimator anim = ObjectAnimator.ofFloat(joinNow, "alpha", 0.1f, 1f);
     anim.setDuration(2000);
     anim.setRepeatCount(ObjectAnimator.INFINITE);
     anim.setRepeatMode(ObjectAnimator.REVERSE);

@@ -1,4 +1,4 @@
-package com.chenbing.oneweather.Data.Network;
+package com.chenbing.oneweather.Data;
 
 import java.io.Serializable;
 import com.google.gson.annotations.SerializedName;

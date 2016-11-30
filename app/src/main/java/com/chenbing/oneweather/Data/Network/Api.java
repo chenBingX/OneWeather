@@ -1,5 +1,8 @@
 package com.chenbing.oneweather.Data.Network;
 
+import com.chenbing.oneweather.Data.BaseWeatherResponse;
+import com.chenbing.oneweather.Data.Result;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

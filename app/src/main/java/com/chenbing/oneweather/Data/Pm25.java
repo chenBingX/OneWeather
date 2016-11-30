@@ -1,4 +1,4 @@
-package com.chenbing.oneweather.Data.Network;
+package com.chenbing.oneweather.Data;
 
 /**
  * Project Name:OneWeather

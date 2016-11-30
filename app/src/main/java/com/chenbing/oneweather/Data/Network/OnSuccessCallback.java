@@ -1,6 +1,8 @@
 package com.chenbing.oneweather.Data.Network;
 
 
+import android.support.annotation.Nullable;
+
 /**
  * Project Name:OneWeather
  * Author:IceChen
@@ -9,5 +11,5 @@ package com.chenbing.oneweather.Data.Network;
  */
 
 public interface OnSuccessCallback<T> {
-  void onSuccess(T t);
+  void onSuccess(@Nullable  T t);
 }
