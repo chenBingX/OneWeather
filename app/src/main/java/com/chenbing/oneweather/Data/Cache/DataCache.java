@@ -1,6 +1,7 @@
-package com.chenbing.oneweather.Data;
+package com.chenbing.oneweather.Data.Cache;
 
 import com.baidu.location.BDLocation;
+import com.chenbing.oneweather.Data.WeatherData;
 
 /**
  * Project Name:OneWeather

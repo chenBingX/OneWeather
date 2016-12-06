@@ -38,14 +38,16 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <!--Service-->
+    <service
+      android:name="com.baidu.location.f"
+      android:enabled="true"
+      android:process=":remote">
+    </service>
   </application>
 
 
-  <!--Service-->
-  <service
-    android:name="com.baidu.location.f"
-    android:enabled="true"
-    android:process=":remote">
-  </service>
+
 
 </manifest>

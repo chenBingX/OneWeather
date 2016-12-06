@@ -5,14 +5,60 @@
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:paddingBottom="@dimen/activity_vertical_margin"
-  android:paddingLeft="@dimen/activity_horizontal_margin"
-  android:paddingRight="@dimen/activity_horizontal_margin"
-  android:paddingTop="@dimen/activity_vertical_margin"
-  tools:context="com.chenbing.oneweather.View.activitys.MainActivity">
+  android:background="@color/themeBlueDeep"
+  android:clipChildren="false"
+  android:gravity="center"
+  tools:background="@color/themeBlueDeep"
+  tools:context="com.chenbing.oneweather.View.activitys.MainActivity"
+  >
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello World!"/>
+  <android.support.v4.view.ViewPager
+    android:id="@+id/pager_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/bottom_opration"
+    android:layout_alignParentStart="true"
+    android:background="@color/transparent"
+    tools:background="@color/opacity_7_white"
+    />
+
+
+  <RelativeLayout
+    android:id="@+id/bottom_opration"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:background="@color/transparent"
+    tools:background="@color/opacity_5_red"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+
+    <include layout="@layout/line_white"/>
+
+
+    <ImageView
+      android:id="@+id/right_button"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:padding="8dp"
+      tools:src="@drawable/sun"
+      />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_toLeftOf="@+id/left_button"
+      android:layout_toRightOf="@+id/right_button"
+      >
+
+    </LinearLayout>
+
+    <ImageView
+      android:id="@+id/left_button"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_alignParentRight="true"
+      android:padding="8dp"
+      tools:src="@drawable/sun"
+      />
+  </RelativeLayout>
 </RelativeLayout>

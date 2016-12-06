@@ -1,6 +1,6 @@
-package com.chenbing.oneweather.Presenter;
+package com.chenbing.oneweather.Presenter.activity;
 
-import com.chenbing.oneweather.Data.DataCache;
+import com.chenbing.oneweather.Data.Cache.DataCache;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Model.WeatherDataModel;
 import com.chenbing.oneweather.Model.WeatherDataModelApi;
@@ -37,6 +37,7 @@ public class SplashActivityPresenter
   @Override
   public void onRequestWeatherDataSuccess(WeatherData data) {
     DataCache.getInstance().setWeatherData(data); //缓存数据
+    DataCache.getInstance().getWeatherData();
   }
 
   @Override

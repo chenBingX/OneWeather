@@ -1,4 +1,9 @@
 <resources>
   <string name="app_name">One Weather</string>
   <string name="join_now">立即进入</string>
+
+  <string name="air_quality">空气质量：%s</string>
+  <string name="temperature">%s°</string>
+  <string name="week">星期%s</string>
+  <string name="today">今天</string>
 </resources>

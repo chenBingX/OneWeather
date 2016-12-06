@@ -2,8 +2,8 @@ package com.chenbing.oneweather.View.activitys;
 
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.R;
-import com.chenbing.oneweather.Presenter.SplashActivityPresenter;
-import com.chenbing.oneweather.Presenter.SplashActivityPresenterApi;
+import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenter;
+import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenterApi;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 

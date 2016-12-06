@@ -12,6 +12,8 @@ import com.chenbing.oneweather.Data.WeatherData;
 public interface WeatherDataModelApi {
   void requestWeatherData();
 
+  void requestWeatherData(String cityName);
+
   void setRequestWeatherDataListener(RequestWeatherDataListener requestWeatherDataListener);
 
   // 因为每个Model可能需要请求多个接口，所以每个回调可能不同，就把它写到内部了

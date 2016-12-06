@@ -1,7 +1,5 @@
-package com.chenbing.oneweather.Presenter;
+package com.chenbing.oneweather.Presenter.activity;
 
-import com.chenbing.oneweather.Model.MainActivityModel;
-import com.chenbing.oneweather.Model.MainActivityModelApi;
 import com.chenbing.oneweather.View.activitys.MainActivityView;
 
 /**
@@ -14,15 +12,13 @@ import com.chenbing.oneweather.View.activitys.MainActivityView;
 public class MainActivityPresenter implements MainActivityPresenterApi {
 
   private MainActivityView view;
-  private MainActivityModelApi model;
 
   public MainActivityPresenter(MainActivityView view) {
     this.view = view;
-    model = new MainActivityModel();
   }
 
   @Override
   public void destroy() {
-
+    view = null;
   }
 }

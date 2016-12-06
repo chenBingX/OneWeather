@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:background="@color/colorPrimary"
+  >
+
+  <LinearLayout android:id="@+id/header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+      android:id="@+id/city_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="60dp"
+      android:gravity="center"
+      android:textColor="@color/white"
+      android:textSize="35sp"
+      tools:text="北京市"
+      />
+
+    <TextView
+      android:id="@+id/weather_info"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
+      android:gravity="center"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      tools:text="多云"
+      />
+
+    <TextView
+      android:id="@+id/air_quality"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:gravity="center"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      tools:text="空气质量：危害健康"
+      />
+
+    <TextView
+      android:id="@+id/temperature"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="0dp"
+      android:gravity="center_horizontal"
+      android:textColor="@color/white"
+      android:textSize="80sp"
+      tools:text="3°"/>
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingTop="270dp"
+    tools:listitem="@layout/item_future_weather_info"
+    />
+</FrameLayout>

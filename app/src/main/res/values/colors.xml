@@ -60,4 +60,13 @@
   <!--Pink-->
   <color name="pink">	#FFC0CB</color>
 
+  <!--Gray-->
+  <color name="gray">#BEBEBE</color>
+  <color name="mid_gray">#999999</color>
+  <color name="mid_white">#33ffffff</color>
+  <color name="gray_d9">#d9d9d9</color>
+  <color name="gray_4c">#4c4c4c</color>
+  <color name="gray_ba">#AFB1B0</color>
+  <color name="gray_f2">#f2f2f2</color>
+
 </resources>
