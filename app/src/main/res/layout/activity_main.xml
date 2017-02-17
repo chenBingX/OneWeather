@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/themeBlueDeep"
+  android:gravity="center"
+  tools:background="@color/themeBlueDeep"
+  tools:context="com.chenbing.oneweather.View.activitys.MainActivity"
+  >
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/pager_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/bottom_opration"
+    android:layout_alignParentStart="true"
+    android:background="@color/transparent"
+    android:overScrollMode="never"
+    tools:background="@color/opacity_7_white"
+    />
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/weather_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:visibility="visible"
+    tools:listitem="@layout/item_weather_list"
+    >
+
+  </android.support.v7.widget.RecyclerView>
+
+
+  <RelativeLayout
+    android:id="@+id/bottom_opration"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/transparent"
+    tools:background="@color/opacity_5_red"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+
+    <include layout="@layout/line_white"/>
+
+
+    <ImageView
+      android:id="@+id/right_button"
+      android:layout_width="40dp"
+      android:layout_height="match_parent"
+      android:padding="10dp"
+      android:src="@drawable/btn_set"
+      android:visibility="gone"
+      />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_toLeftOf="@+id/left_button"
+      android:layout_toRightOf="@+id/right_button"
+      >
+
+    </LinearLayout>
+
+    <ImageView
+      android:id="@+id/left_button"
+      android:layout_width="40dp"
+      android:layout_height="match_parent"
+      android:layout_alignParentRight="true"
+      android:padding="10dp"
+      android:src="@drawable/btn_more"
+      />
+  </RelativeLayout>
+</RelativeLayout>

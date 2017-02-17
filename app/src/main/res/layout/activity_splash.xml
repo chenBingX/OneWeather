@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_splash"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.chenbing.oneweather.View.activitys.SplashActivity">
+
+  <ImageView
+    android:id="@+id/sun"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="90dp"
+    android:src="@drawable/sun"
+    />
+
+  <ImageView
+    android:id="@+id/cloud_1"
+    android:layout_width="140dp"
+    android:layout_height="100dp"
+    android:layout_below="@+id/sun"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="-50dp"
+    android:src="@drawable/cloud_1"
+    android:tint="@color/white"
+    />
+
+  <ImageView
+    android:id="@+id/cloud_2"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:layout_below="@+id/sun"
+    android:layout_centerHorizontal="true"
+    android:layout_marginLeft="-20dp"
+    android:layout_marginTop="-50dp"
+    android:layout_toEndOf="@+id/cloud_1"
+    android:src="@drawable/cloud_1"
+    android:tint="@color/white"
+    />
+
+  <ImageView
+    android:id="@+id/cloud_3"
+    android:layout_width="130dp"
+    android:layout_height="100dp"
+    android:layout_below="@+id/sun"
+    android:layout_centerHorizontal="true"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="-40dp"
+    android:src="@drawable/cloud_1"
+    android:tint="@color/white"
+    />
+
+  <com.chenbing.oneweather.CustomViews.TextView.NormalTextView
+    android:id="@+id/join_now"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="180dp"
+    android:text="@string/join_now"
+    android:textColor="@color/white"
+    android:textSize="@dimen/join_now_text_size"
+    android:visibility="visible"
+    />
+</RelativeLayout>

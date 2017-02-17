@@ -1,0 +1,29 @@
+@startuml
+title UML 类图
+skinparam backgroundColor #yellow
+skinparam activityStartColor #white
+skinparam activityEndColor #red
+skinparam activityBackgroundColor #Peru
+
+(*) -->[类图开始] "Activity1"
+partition 判断模块 #blue
+ --> "Activity2" as 2
+note right:as可以让模块有简称
+if "some condition" then
+    -->[true] "Activity3"
+    --> "Activity4"
+    partition 同步模块 #yellow
+    --> ===B1===
+    ===B1=== --> "Activity6"
+    --> ===B2===
+    ===B1=== --> "Activity7"
+    --> ===B2===
+    --> "Activity8"
+    end partition
+    -right->[结束程序](*)
+else
+    ->[false] "Activity5"
+    -->[程序结束](*)
+endif
+end partition
+@enduml

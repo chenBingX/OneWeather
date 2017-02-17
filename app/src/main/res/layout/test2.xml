@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/themeBlueDeep"
+  android:clipChildren="false"
+  android:gravity="center"
+  tools:background="@color/themeBlueDeep"
+  tools:context="com.chenbing.oneweather.View.activitys.MainActivity"
+  >
+
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/bottom_opration"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@color/transparent"
+    tools:background="@color/opacity_5_red"
+    tools:layout_constraintTop_creator="1"
+    tools:layout_constraintRight_creator="1"
+    tools:layout_constraintBottom_creator="1"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pager_container"
+    tools:layout_constraintLeft_creator="1"
+    app:layout_constraintLeft_toLeftOf="parent">
+
+    <include
+      layout="@layout/line_white"
+      android:layout_height="0dp"
+      android:layout_width="0dp"
+      tools:layout_editor_absoluteY="643dp"
+      tools:layout_constraintRight_creator="1"
+      app:layout_constraintRight_toRightOf="parent"
+      tools:layout_constraintLeft_creator="1"
+      app:layout_constraintLeft_toLeftOf="@+id/right_button"/>
+
+
+    <ImageView
+      android:id="@+id/right_button"
+      android:layout_width="49dp"
+      android:layout_height="47dp"
+      android:padding="8dp"
+      tools:src="@drawable/sun"
+      tools:layout_constraintTop_creator="1"
+      tools:layout_constraintBottom_creator="1"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      android:contentDescription=""
+      tools:ignore="ContentDescription"
+      app:layout_constraintRight_toLeftOf="@+id/left_button"
+      app:layout_constraintHorizontal_bias="0.0"/>
+
+
+    <ImageView
+      android:id="@+id/left_button"
+      android:layout_width="56dp"
+      android:layout_height="39dp"
+      android:padding="8dp"
+      tools:src="@drawable/sun"
+      tools:ignore="ContentDescription"
+      tools:layout_editor_absoluteX="323dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginBottom="16dp"/>
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/pager_container"
+    android:layout_width="wrap_content"
+    android:layout_height="216dp"
+    android:background="@color/transparent"
+    tools:background="@color/opacity_7_white"
+    tools:layout_constraintRight_creator="1"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="384dp"
+    />
+</android.support.constraint.ConstraintLayout>

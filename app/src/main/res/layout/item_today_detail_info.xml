@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/transparent"
+  android:orientation="vertical"
+  tools:background="@color/black"
+  >
+
+  <include layout="@layout/line_white"/>
+
+  <TextView
+    android:id="@+id/chuanyi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    tools:text="天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。"
+    android:padding="10dp"
+    />
+
+  <include layout="@layout/line_white"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    >
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      android:paddingRight="10dp"
+      >
+
+      <TextView
+        android:id="@+id/update_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="更新时间："
+        android:textColor="@color/white"
+        />
+
+      <TextView
+        android:id="@+id/moon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="农历："
+        android:textColor="@color/white"
+        />
+
+      <TextView
+        android:id="@+id/wind_direct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:text="风向："
+        android:textColor="@color/white"
+        />
+
+      <TextView
+        android:id="@+id/wind_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="等级："
+        android:textColor="@color/white"
+        />
+
+      <TextView
+        android:id="@+id/air_quality_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:text="空气质量指数："
+        android:textColor="@color/white"
+        />
+
+      <TextView
+        android:id="@+id/air_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="空气质量："
+        android:textColor="@color/white"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      >
+
+      <TextView
+        android:id="@+id/update_time_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        tools:text="2016年12月05日16时"
+        />
+
+      <TextView
+        android:id="@+id/moon_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        tools:text="十一月初七"
+        />
+
+      <TextView
+        android:id="@+id/wind_direct_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/white"
+        tools:text="西北风"
+        />
+
+      <TextView
+        android:id="@+id/wind_power_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        tools:text="4级"
+        />
+
+      <TextView
+        android:id="@+id/air_quality_index_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/white"
+        tools:text="38"
+        />
+
+      <TextView
+        android:id="@+id/air_quality_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:paddingLeft="10dp"
+        android:textColor="@color/white"
+        tools:text="优"
+        />
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</LinearLayout>
