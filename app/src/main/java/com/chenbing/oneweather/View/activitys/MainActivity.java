@@ -6,6 +6,7 @@ import java.util.List;
 import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.CustomViews.ZoomOutPageTransformer;
 import com.chenbing.oneweather.Data.SimpleWeather;
+import com.chenbing.oneweather.Data.Cache.Config;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenterApi;
@@ -68,6 +69,12 @@ public class MainActivity extends BaseActivity implements MainActivityView {
   @Override
   protected void initData() {
     fragments.add(WeatherDetailFragment.newInstance(null));
+    List<String> myCityList = Config.getMyCityList();
+    if (myCityList != null && !myCityList.isEmpty()) {
+      for (String cityName : myCityList) {
+        fragments.add(WeatherDetailFragment.newInstance(cityName));
+      }
+    }
   }
 
   @Override
@@ -153,6 +160,15 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     LogUtils.e("simpleWeather = " + simpleWeather.getCity());
     weatherListAdapter.updateDatas(simpleWeathers);
     weatherListAdapter.notifyItemRangeInserted(simpleWeathers.size() - 1, 1);
+    updateMyCityListCache();
+  }
+
+  private void updateMyCityListCache() {
+    List<String> myCityList = new ArrayList<>();
+    for (int i = 1; i < simpleWeathers.size(); i++) {
+      myCityList.add(simpleWeathers.get(i).getCity());
+    }
+    Config.saveMyCityList(myCityList);
   }
 
   @Override

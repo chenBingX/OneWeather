@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.chenbing.oneweather.Data.RxEvent.CityNameEvent;
 import com.chenbing.oneweather.R;
+import com.chenbing.oneweather.Data.RxEvent.CityNameEvent;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenter;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenterApi;
 import com.chenbing.oneweather.Utils.RxBus;
@@ -20,7 +20,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;

@@ -1,13 +1,17 @@
 package com.chenbing.oneweather.Data.Cache;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 import com.chenbing.oneweather.BuildConfig;
 import com.chenbing.oneweather.Utils.AppUtils;
+import com.chenbing.oneweather.Utils.GsonUtils;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 /**
  * Project Name:OneWeather
@@ -19,9 +23,11 @@ import java.io.IOException;
 public class Config {
 
   public static final boolean DEBUG = BuildConfig.DEBUG;
-  // public static final boolean DEBUG = false;
-  public static final String GENERIC_CONFIG_PREFERENCE_NAME = "kratos_config";
+
+  public static final String GENERIC_CONFIG_PREFERENCE_NAME = "CoorChice_config";
   private static String START_APP_TIME_KEY = "last_start_app_time";
+  private static String MY_CITY_LIST_KEY = "my_city_list_key";
+
   private static long LAST_START_APP_TIME = 0;
 
   private static SharedPreferences genericSharedPrefs;
@@ -52,6 +58,18 @@ public class Config {
 
   public static synchronized long getLastStartAppTime() {
     return LAST_START_APP_TIME;
+  }
+
+  public static void saveMyCityList(List<String> myCityList) {
+    SharedPreferences.Editor editor = genericSharedPrefs.edit();
+    editor.putString(MY_CITY_LIST_KEY, GsonUtils.getSingleInstance().toJson(myCityList));
+    editor.apply();
+  }
+
+  public static synchronized List<String> getMyCityList() {
+    String stringJson = genericSharedPrefs.getString(MY_CITY_LIST_KEY, "");
+    Type type = new TypeToken<List<String>>() {}.getType();
+    return GsonUtils.getSingleInstance().fromJson(stringJson, type);
   }
 
   public static final void saveObject(String key, @NonNull Object object)
