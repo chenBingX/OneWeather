@@ -6,7 +6,7 @@
   <string name="temperature">%s°</string>
   <string name="week">星期%s</string>
   <string name="today">今天</string>
-  <string name="weather_list_footer_title">输入你所在城市的名称</string>
+  <string name="weather_list_footer_title">输入需要查询的城市名称</string>
   <string name="cancel">取消</string>
   <string name="search_not_found">未找到结果。</string>
   <string name="no_data">暂无数据</string>

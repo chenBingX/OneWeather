@@ -68,8 +68,6 @@ public class MainActivity extends BaseActivity implements MainActivityView {
   @Override
   protected void initData() {
     fragments.add(WeatherDetailFragment.newInstance(null));
-    fragments.add(WeatherDetailFragment.newInstance("昆明"));
-    fragments.add(WeatherDetailFragment.newInstance("西安"));
   }
 
   @Override
