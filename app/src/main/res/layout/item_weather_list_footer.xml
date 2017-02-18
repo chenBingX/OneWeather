@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:background="@color/opacity_3_5_black"
+  android:padding="10dp"
+  android:id="@+id/root"
+  >
+
+  <com.chenbing.oneweather.CustomViews.TextView.NormalTextView
+    android:id="@+id/header_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="输入你所在城市的名称"
+    android:gravity="center"
+    android:textSize="14sp"
+    android:textColor="@color/opacity_8_white"
+    android:layout_marginBottom="10dp"
+    />
+
+  <LinearLayout
+    android:id="@+id/search_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_toLeftOf="@+id/cancel"
+    android:layout_below="@+id/header_info"
+    android:background="@drawable/shape_weather_list_item_footer_et"
+    >
+  <com.chenbing.oneweather.CustomViews.RoundCornerTextView
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    app:state_drawable="@drawable/search"
+    app:solid="@color/opacity_3_black"
+    app:isShowState="true"
+    app:corner="5dp"
+    />
+
+  <EditText
+    android:id="@+id/search"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:textSize="10sp"
+    android:textColor="@color/opacity_8_white"
+    android:textColorHint="@color/opacity_8_white"
+    android:fadingEdge="none"
+    android:singleLine="true"
+    android:background="@null"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:textCursorDrawable="@drawable/shape_et_cursor"
+    />
+  </LinearLayout>
+
+  <com.chenbing.oneweather.CustomViews.TextView.NormalTextView
+    android:id="@+id/cancel"
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:text="取消"
+    android:textSize="14sp"
+    android:gravity="center"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/header_info"
+    android:layout_marginLeft="8dp"
+    android:textColor="@color/opacity_8_white"
+    />
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/city_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/search_container"
+    tools:listitem="@layout/item_text_view"
+    android:padding="10dp"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    />
+
+
+</RelativeLayout>

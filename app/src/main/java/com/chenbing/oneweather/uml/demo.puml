@@ -1,0 +1,39 @@
+@startuml
+title ULM 顺序图
+actor foo1 #red
+boundary foo2 #blue
+control foo3
+entity foo4
+database foo5 #yellow
+participant "Alice()" #red
+actor Bob #black
+
+foo1->foo2:to boundary
+note left:foo1是一个测试使用者
+
+foo1->foo3:to control
+foo1->foo4:to entity
+foo1->foo5:to database
+foo5->foo3:database to control
+
+foo1 -> foo1:bob自己找自己
+
+foo5 --> foo1:虚线
+
+"Alice()"-->foo1:特殊名称需要加双引号
+
+autonumber 20
+Bob -[#yellow]>o "Alice()":指定序号
+note right:autonumber指定序号
+Bob <[#black]-> "Alice()"
+Bob -\ "Alice()"
+Bob -[#blue]>> "Alice()"
+
+note right of Bob #blue
+     指定注解位置,在参与者右边
+end note
+
+note over Bob,"Alice()" #red
+     指定在参与者上方,并且同时注解了两个参与者
+end note
+@enduml

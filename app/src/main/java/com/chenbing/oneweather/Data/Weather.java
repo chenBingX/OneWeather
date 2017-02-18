@@ -1,5 +1,6 @@
 package com.chenbing.oneweather.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,8 @@ import java.util.List;
  * week : 二
  * nongli : 十一月初一
  */
-public class Weather {
+public class Weather implements Serializable{
+  private static final long serialVersionUID = 8892283121539904372L;
   private String date;
   private Info info;
   private String week;
@@ -53,7 +55,8 @@ public class Weather {
     this.nongli = nongli;
   }
 
-  public static class Info {
+  public static class Info implements Serializable{
+    private static final long serialVersionUID = -6062210436540965201L;
     private List<String> day;
     private List<String> night;
 

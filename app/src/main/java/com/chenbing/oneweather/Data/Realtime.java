@@ -7,6 +7,8 @@ package com.chenbing.oneweather.Data;
  * Notes:
  */
 
+import java.io.Serializable;
+
 /**
  * city_code : 101010100
  * city_name : 北京
@@ -18,7 +20,9 @@ package com.chenbing.oneweather.Data;
  * weather : {"temperature":"2","humidity":"57","info":"多云","img":"1"}
  * wind : {"direct":"东风","power":"2级","offset":null,"windspeed":null}
  */
-public class Realtime {
+
+public class Realtime implements Serializable{
+  private static final long serialVersionUID = 8990100549406358180L;
   private String city_code;
   private String city_name;
   private String date;
@@ -115,7 +119,8 @@ public class Realtime {
     this.wind = wind;
   }
 
-  public static class Weather {
+  public static class Weather implements Serializable{
+    private static final long serialVersionUID = -7506603134801468775L;
     private String temperature;
     private String humidity;
     private String info;
@@ -154,7 +159,8 @@ public class Realtime {
     }
   }
 
-  public static class Wind {
+  public static class Wind implements Serializable{
+    private static final long serialVersionUID = -7628476690172440418L;
     private String direct;
     private String power;
     private Object offset;

@@ -4,6 +4,4 @@
   android:layout_width="match_parent"
   android:layout_height="0.2dp"
   android:orientation="vertical"
-  android:background="@color/white"
-  >
-</View>
+  android:background="@color/opacity_7_white" />

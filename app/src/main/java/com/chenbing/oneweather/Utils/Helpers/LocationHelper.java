@@ -7,7 +7,11 @@ import com.chenbing.oneweather.ChiceApplication;
 
 /**
  * Project Name:OneWeather
+<<<<<<< HEAD
  * Author:IceChen
+=======
+ * Author:CoorChice
+>>>>>>> temp
  * Date:2016/11/30
  * Notes:
  */

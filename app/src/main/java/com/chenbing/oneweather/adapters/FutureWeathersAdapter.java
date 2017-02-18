@@ -38,7 +38,10 @@ public class FutureWeathersAdapter extends RecyclerView.Adapter {
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> temp
     if (viewType == WEATHER_ITEM) {
       return new BaseItemViewHolder(new FutureWeatherItem(mContext));
     } else if(viewType == TODAY_INFO_ITEM){

@@ -7,6 +7,7 @@ package com.chenbing.oneweather.Data;
  * Notes:
  */
 
+import java.io.Serializable;
 
 /**
  * key : Beijing
@@ -16,7 +17,8 @@ package com.chenbing.oneweather.Data;
  * dateTime : 2016年11月29日10时
  * cityName : 北京
  */
-public class Pm25 {
+public class Pm25 implements Serializable{
+  private static final long serialVersionUID = 1831873779905345493L;
   private String key;
   private int show_desc;
   private Pm25Info pm25;
@@ -70,7 +72,8 @@ public class Pm25 {
    * quality : 轻度污染
    * des : 轻微污染 易感人群症状有轻度加剧，健康人群出现刺激症状 心脏病和呼吸系统疾病患者应减少体力消耗和户外活动。
    */
-  public static class Pm25Info {
+  public static class Pm25Info implements Serializable{
+    private static final long serialVersionUID = 2324707852474004330L;
     private String curPm;
     private String pm25;
     private String pm10;

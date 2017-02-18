@@ -41,7 +41,8 @@ public class WeatherData implements Serializable {
     this.data = data;
   }
 
-  public static class Data {
+  public static class Data implements Serializable{
+    private static final long serialVersionUID = -3810404794068160614L;
     private String pubdate;
     private String pubtime;
     private Realtime realtime;

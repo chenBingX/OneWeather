@@ -6,7 +6,6 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/themeBlueDeep"
-  android:clipChildren="false"
   android:gravity="center"
   tools:background="@color/themeBlueDeep"
   tools:context="com.chenbing.oneweather.View.activitys.MainActivity"
@@ -19,14 +18,27 @@
     android:layout_above="@+id/bottom_opration"
     android:layout_alignParentStart="true"
     android:background="@color/transparent"
+
+    android:overScrollMode="never"
     tools:background="@color/opacity_7_white"
     />
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/weather_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    tools:visibility="visible"
+    tools:listitem="@layout/item_weather_list"
+    >
+
+  </android.support.v7.widget.RecyclerView>
 
 
   <RelativeLayout
     android:id="@+id/bottom_opration"
     android:layout_width="match_parent"
-    android:layout_height="46dp"
+    android:layout_height="40dp"
     android:background="@color/transparent"
     tools:background="@color/opacity_5_red"
     android:layout_alignParentBottom="true"
@@ -37,10 +49,12 @@
 
     <ImageView
       android:id="@+id/right_button"
-      android:layout_width="wrap_content"
+
+      android:layout_width="40dp"
       android:layout_height="match_parent"
-      android:padding="8dp"
-      tools:src="@drawable/sun"
+      android:padding="10dp"
+      android:src="@drawable/btn_set"
+      android:visibility="gone"
       />
 
     <LinearLayout
@@ -54,11 +68,12 @@
 
     <ImageView
       android:id="@+id/left_button"
-      android:layout_width="wrap_content"
+
+      android:layout_width="40dp"
       android:layout_height="match_parent"
       android:layout_alignParentRight="true"
-      android:padding="8dp"
-      tools:src="@drawable/sun"
+      android:padding="10dp"
+      android:src="@drawable/btn_more"
       />
   </RelativeLayout>
 </RelativeLayout>

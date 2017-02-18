@@ -1,5 +1,7 @@
 package com.chenbing.oneweather.Data;
 
+import java.io.Serializable;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,8 @@ import java.util.List;
  * Notes:
  */
 
-public class F3h {
+public class F3h implements Serializable{
+  private static final long serialVersionUID = -4018235922550837349L;
   private List<Temperature> temperature;
   private List<Precipitation> precipitation;
 
@@ -33,7 +36,8 @@ public class F3h {
    * jg : 20161129080000
    * jb : 2
    */
-  public static class Temperature {
+  public static class Temperature implements Serializable{
+    private static final long serialVersionUID = 4558506494487741897L;
     private String jg;
     private String jb;
 
@@ -58,7 +62,8 @@ public class F3h {
    * jg : 20161129080000
    * jf : 0.4
    */
-  public static class Precipitation {
+  public static class Precipitation implements Serializable {
+    private static final long serialVersionUID = 7202035244758913026L;
     private String jg;
     private String jf;
 
