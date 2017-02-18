@@ -22,7 +22,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/white"
-    android:textSize="16sp"
+    android:textSize="12sp"
     android:text="17:00"
     />
 
@@ -31,7 +31,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/time"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="1dp"
     android:textColor="@color/white"
     android:textSize="28sp"
     tools:text="旧金山"
@@ -44,7 +44,7 @@
     android:layout_alignParentRight="true"
     android:layout_centerVertical="true"
     android:textColor="@color/white"
-    android:textSize="46sp"
+    android:textSize="42sp"
     tools:text="3°"
     />
 

@@ -92,7 +92,6 @@ public class CityListModel implements CityListModelApi {
 
   @Override
   public void matchCity(String content) {
-    loadCityList();
     setOnCityListLoadedListener(cityList -> {
       Observable.create(new Observable.OnSubscribe<List<String>>() {
         @Override
@@ -100,7 +99,7 @@ public class CityListModel implements CityListModelApi {
           List<String> result = new ArrayList<>();
           for (City city : cityList) {
             String cityName = city.getAreaname();
-            if (cityName.contains("content")) {
+            if (cityName.contains(content)) {
               result.add(cityName);
             }
           }
@@ -108,28 +107,29 @@ public class CityListModel implements CityListModelApi {
           subscriber.onCompleted();
         }
       })
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe(new Subscriber<List<String>>() {
-            @Override
-            public void onCompleted() {
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<List<String>>() {
+          @Override
+          public void onCompleted() {
 
-        }
+          }
 
-            @Override
-            public void onError(Throwable e) {
+          @Override
+          public void onError(Throwable e) {
 
-        }
+          }
 
-            @Override
-            public void onNext(List<String> result) {
-              if (onMatchedListener != null) {
-                onMatchedListener.onMatched(result);
-              }
+          @Override
+          public void onNext(List<String> result) {
+            if (onMatchedListener != null) {
+              onMatchedListener.onMatched(result);
             }
-          });
+          }
+        });
 
     });
+    loadCityList();
   }
 
   public void setOnCityListLoadedListener(OnCityListLoadedListener onCityListLoadedListener) {

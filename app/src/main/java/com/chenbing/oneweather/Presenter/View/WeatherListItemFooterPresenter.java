@@ -20,8 +20,6 @@ public class WeatherListItemFooterPresenter implements WeatherListItemFooterPres
     this.model = new CityListModel();
   }
 
-
-
   @Override
   public void matchCity(String content, CityListModel.OnMatchedListener listener) {
     model.setOnMatchedListener(listener);

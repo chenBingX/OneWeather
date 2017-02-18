@@ -14,7 +14,7 @@
     android:id="@+id/header_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="输入你所在城市的名称"
+    android:text="@string/weather_list_footer_title"
     android:gravity="center"
     android:textSize="14sp"
     android:textColor="@color/opacity_8_white"
@@ -59,7 +59,7 @@
     android:id="@+id/cancel"
     android:layout_width="wrap_content"
     android:layout_height="30dp"
-    android:text="取消"
+    android:text="@string/cancel"
     android:textSize="14sp"
     android:gravity="center"
     android:layout_alignParentRight="true"
@@ -77,6 +77,19 @@
     android:padding="10dp"
     android:overScrollMode="never"
     android:scrollbars="none"
+    android:visibility="gone"
+    />
+
+  <com.chenbing.oneweather.CustomViews.TextView.NormalTextView
+    android:id="@+id/not_found"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/search_container"
+    android:padding="5dp"
+    android:text="@string/search_not_found"
+    android:textColor="@color/opacity_5_white"
+    android:layout_margin="10dp"
+    android:visibility="gone"
     />
 
 

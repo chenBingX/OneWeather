@@ -50,7 +50,7 @@ public class WeatherListItem extends BaseRelativeLayout {
   public void setData(SimpleWeather data, int position) {
     if (position == 0){
       MarginLayoutParams layoutParams = (MarginLayoutParams) vpContainer.getLayoutParams();
-      layoutParams.topMargin = DisplayUtils.dipToPx(10);
+      layoutParams.topMargin = DisplayUtils.dipToPx(30);
       vpContainer.requestLayout();
     }
     tvCityName.setText(data.getCity());

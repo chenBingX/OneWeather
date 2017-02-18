@@ -1,6 +1,7 @@
 package com.chenbing.oneweather.CustomViews.ItemView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.chenbing.oneweather.R;
@@ -8,13 +9,14 @@ import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenter;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenterApi;
 import com.chenbing.oneweather.View.BaseView.BaseRelativeLayout;
 import com.chenbing.oneweather.adapters.CityListAdapter;
+import com.chenbing.oneweather.icing.SimpleTextWatcher;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -29,6 +31,8 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
   EditText etSearch;
   @BindView(R.id.cancel)
   TextView tvCancel;
+  @BindView(R.id.not_found)
+  TextView tvNotFound;
 
   @BindView(R.id.city_list)
   RecyclerView rvCityList;
@@ -48,8 +52,7 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
 
   public WeatherListItemFooter(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    initView();
-    addListener();
+    init();
   }
 
   @Override
@@ -57,48 +60,54 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
     return R.layout.item_weather_list_footer;
   }
 
-  private void initView() {
+  private void init() {
     presenter = new WeatherListItemFooterPresenter(this);
+    initRvCityList();
+    addListener();
+  }
 
-    rvCityList.setLayoutManager(new LinearLayoutManager(getContext()));
+  private void initRvCityList() {
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+    rvCityList.setLayoutManager(layoutManager);
     rvCityList.setItemAnimator(new DefaultItemAnimator());
     cityListAdapter = new CityListAdapter(getContext(), datas);
     rvCityList.setAdapter(cityListAdapter);
-
   }
 
   private void addListener() {
     tvCancel.setOnClickListener(v->{
-      if (rvCityList.getVisibility() == VISIBLE) {
-        rvCityList.setVisibility(GONE);
-      } else {
-        rvCityList.setVisibility(VISIBLE);
-      }
+      etSearch.setText("");
+      etSearch.clearFocus();
+      rvCityList.setVisibility(GONE);
+      tvNotFound.setVisibility(GONE);
     });
 
-    etSearch.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    listenEtSearchTextChange();
+  }
 
-      }
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-      }
-
+  private void listenEtSearchTextChange() {
+    etSearch.addTextChangedListener(new SimpleTextWatcher() {
       @Override
       public void afterTextChanged(Editable s) {
-        presenter.matchCity(s.toString(), cities -> {
-          if (!cities.isEmpty()) {
-            cityListAdapter.updateDatas(cities);
-          } else {
-
-          }
-        });
+        if (!TextUtils.isEmpty(s.toString())) {
+          tryToMatchCity(s.toString());
+        } else {
+          cityListAdapter.updateDatas(Collections.emptyList());
+          rvCityList.setVisibility(GONE);
+          tvNotFound.setVisibility(VISIBLE);
+        }
       }
     });
   }
 
+  private void tryToMatchCity(String s) {
+    presenter.matchCity(s, cities -> {
+      if (!cities.isEmpty()) {
+        cityListAdapter.setMatchContent(s);
+        cityListAdapter.updateDatas(cities);
+        rvCityList.setVisibility(VISIBLE);
+        tvNotFound.setVisibility(GONE);
+      }
+    });
+  }
 }
