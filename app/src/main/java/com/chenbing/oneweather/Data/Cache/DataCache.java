@@ -3,7 +3,6 @@ package com.chenbing.oneweather.Data.Cache;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 /**
  * 将数据缓存到内存中。
@@ -50,6 +49,9 @@ public class DataCache {
     return t;
   }
 
+  /**
+   * 推荐！当确定一个数据不再需要时，请调用这个方法把它释放。
+   */
   public void remove(@NonNull String tag){
     dataMap.remove(tag);
   }
