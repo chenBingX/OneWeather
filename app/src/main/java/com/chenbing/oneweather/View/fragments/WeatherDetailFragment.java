@@ -5,7 +5,7 @@ import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.fragment.WeatherDetailFragmentPresenter;
 import com.chenbing.oneweather.Presenter.fragment.WeatherDetailFragmentPresenterApi;
-import com.chenbing.oneweather.Utils.DisplayUtils;
+import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.BaseView.BaseFragment;
 import com.chenbing.oneweather.adapters.FutureWeathersAdapter;
 
@@ -47,6 +47,9 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
   @BindView(R.id.recyclerView)
   RecyclerView recyclerView;
 
+  @BindView(R.id.empty_container)
+  ViewGroup emptyContainer;
+
   private WeatherDetailFragmentPresenterApi presenter;
   private WeatherData data;
   private FutureWeathersAdapter adapter;
@@ -56,6 +59,7 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
 
   public static BaseFragment newInstance(String cityName) {
     WeatherDetailFragment instance = new WeatherDetailFragment();
+    new WeatherDetailFragmentPresenter(null).getWeatherData(cityName);
     Bundle args = new Bundle();
     args.putString(CITY_NAME, cityName);
     instance.setArguments(args);
@@ -87,8 +91,6 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
   }
-
-
 
   @Override
   protected void addListener() {
@@ -135,10 +137,13 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
   public void onWeatherDataUpdate(WeatherData data) {
     if (data != null) {
       updateView(data.getData());
+    } else {
+      showEmptyView();
     }
   }
 
   private void updateView(WeatherData.Data data) {
+    emptyContainer.setVisibility(View.GONE);
     setHeaderView(data);
     setRecyclerView(data);
   }
@@ -151,7 +156,10 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
     this.weatherInfo.setText(weatherInfo);
 
     String airQualityStrFormat = getString(R.string.air_quality);
-    String airQuality = String.format(airQualityStrFormat, data.getPm25().getPm25().getQuality());
+    String airQuality = "暂无数据";
+    if (data.getPm25() != null && data.getPm25().getPm25() != null) {
+      airQuality = String.format(airQualityStrFormat, data.getPm25().getPm25().getQuality());
+    }
     this.airQuality.setText(airQuality);
 
     String temperatureFormat = getString(R.string.temperature);
@@ -169,5 +177,10 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
     } else {
       adapter.updateData(data);
     }
+  }
+
+  private void showEmptyView() {
+    this.cityName.setText(getArguments().getString(CITY_NAME));
+    emptyContainer.setVisibility(View.VISIBLE);
   }
 }

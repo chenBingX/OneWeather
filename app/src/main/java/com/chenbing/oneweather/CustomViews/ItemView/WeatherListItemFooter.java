@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.chenbing.oneweather.Data.RxEvent.CityNameEvent;
 import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenter;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenterApi;
+import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.BaseView.BaseRelativeLayout;
 import com.chenbing.oneweather.adapters.CityListAdapter;
 import com.chenbing.oneweather.icing.SimpleTextWatcher;
@@ -18,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -76,13 +79,26 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
 
   private void addListener() {
     tvCancel.setOnClickListener(v->{
-      etSearch.setText("");
-      etSearch.clearFocus();
-      rvCityList.setVisibility(GONE);
-      tvNotFound.setVisibility(GONE);
+      clearSearch();
+    });
+
+    cityListAdapter.setOnItemClickListener((v, cityName) -> {
+      if (!TextUtils.isEmpty(cityName)){
+        CityNameEvent cityNameEvent = new CityNameEvent();
+        cityNameEvent.cityName = cityName;
+        RxBus.get().post(cityNameEvent);
+        clearSearch();
+      }
     });
 
     listenEtSearchTextChange();
+  }
+
+  private void clearSearch() {
+    etSearch.setText("");
+    etSearch.clearFocus();
+    rvCityList.setVisibility(GONE);
+    tvNotFound.setVisibility(GONE);
   }
 
   private void listenEtSearchTextChange() {
@@ -94,7 +110,7 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
         } else {
           cityListAdapter.updateDatas(Collections.emptyList());
           rvCityList.setVisibility(GONE);
-          tvNotFound.setVisibility(VISIBLE);
+          tvNotFound.setVisibility(GONE);
         }
       }
     });
@@ -107,6 +123,9 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
         cityListAdapter.updateDatas(cities);
         rvCityList.setVisibility(VISIBLE);
         tvNotFound.setVisibility(GONE);
+      } else {
+        rvCityList.setVisibility(GONE);
+        tvNotFound.setVisibility(VISIBLE);
       }
     });
   }

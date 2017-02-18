@@ -9,6 +9,7 @@ import com.chenbing.oneweather.Data.SimpleWeather;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenterApi;
+import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 import com.chenbing.oneweather.View.BaseView.BaseFragment;
 import com.chenbing.oneweather.View.fragments.WeatherDetailFragment;
@@ -19,6 +20,7 @@ import android.app.Fragment;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -149,18 +151,24 @@ public class MainActivity extends BaseActivity implements MainActivityView {
 
   @Override
   public void updateSimpleWeatherDatas(SimpleWeather simpleWeather) {
-    boolean isContainer = false;
-    for (SimpleWeather data : simpleWeathers) {
-      if (data.getCity().equals(simpleWeather.getCity())) {
-        isContainer = true;
-        break;
-      }
+    simpleWeathers.add(simpleWeather);
+    LogUtils.e("simpleWeather = " + simpleWeather.getCity());
+    weatherListAdapter.updateDatas(simpleWeathers);
+    weatherListAdapter.notifyItemRangeInserted(simpleWeathers.size() - 1, 1);
+  }
+
+  @Override
+  public void addCityPage(String cityName) {
+    fragments.add(WeatherDetailFragment.newInstance(cityName));
+    PagerAdapter adapter = pagerContainer.getAdapter();
+    if (adapter != null) {
+      adapter.notifyDataSetChanged();
     }
-    if (!isContainer) {
-      simpleWeathers.add(simpleWeather);
-      weatherListAdapter.updateDatas(simpleWeathers);
-      weatherListAdapter.notifyItemRangeInserted(simpleWeathers.size() - 1, 1);
-    }
+  }
+
+  @Override
+  public void subtractCityPage(int position) {
+
   }
 
   @Override
@@ -171,4 +179,6 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     }
     return super.onKeyDown(keyCode, event);
   }
+
+
 }

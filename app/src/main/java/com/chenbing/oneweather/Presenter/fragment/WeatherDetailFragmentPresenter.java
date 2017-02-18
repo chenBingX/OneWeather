@@ -1,12 +1,9 @@
 package com.chenbing.oneweather.Presenter.fragment;
 
-import android.support.annotation.NonNull;
-
 import com.chenbing.oneweather.Data.SimpleWeather;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Model.WeatherDataModel;
 import com.chenbing.oneweather.Model.WeatherDataModelApi;
-import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.fragments.WeatherDetailFragmentView;
 
@@ -20,6 +17,7 @@ import com.chenbing.oneweather.View.fragments.WeatherDetailFragmentView;
 public class WeatherDetailFragmentPresenter implements WeatherDetailFragmentPresenterApi, WeatherDataModelApi.RequestWeatherDataListener {
   private WeatherDetailFragmentView view;
   private WeatherDataModelApi model;
+  private String cityName;
 
   public WeatherDetailFragmentPresenter(WeatherDetailFragmentView view) {
     this.view = view;
@@ -28,17 +26,24 @@ public class WeatherDetailFragmentPresenter implements WeatherDetailFragmentPres
   }
 
   public void getWeatherData(String cityName){
+    this.cityName = cityName;
     model.requestWeatherData(cityName);
   }
 
   @Override
   public void onRequestWeatherDataSuccess(WeatherData data) {
-    view.onWeatherDataUpdate(data);
-    SimpleWeather simpleWeather = new SimpleWeather();
-    simpleWeather.setCity(data.getData().getRealtime().getCity_name());
-    simpleWeather.setTemperature(data.getData().getRealtime().getWeather().getTemperature());
-    LogUtils.e("发送了simpleWeather");
-    RxBus.get().post(simpleWeather);
+    if (view != null){
+      view.onWeatherDataUpdate(data);
+    } else {
+      SimpleWeather simpleWeather = new SimpleWeather();
+      if (data != null) {
+        simpleWeather.setCity(data.getData().getRealtime().getCity_name());
+        simpleWeather.setTemperature(data.getData().getRealtime().getWeather().getTemperature());
+      } else {
+        simpleWeather.setCity(cityName);
+      }
+      RxBus.get().post(simpleWeather);
+    }
   }
 
   @Override

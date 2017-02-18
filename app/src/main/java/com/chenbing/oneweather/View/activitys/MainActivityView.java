@@ -13,4 +13,8 @@ import com.chenbing.oneweather.View.BaseView.MvpView;
 public interface MainActivityView extends MvpView {
 
   void updateSimpleWeatherDatas(SimpleWeather simpleWeather);
+
+  void addCityPage(String cityName);
+
+  void subtractCityPage(int position);
 }

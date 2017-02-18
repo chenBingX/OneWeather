@@ -65,4 +65,25 @@
     android:paddingTop="270dp"
     tools:listitem="@layout/item_future_weather_info"
     />
+
+  <RelativeLayout
+    android:id="@+id/empty_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    >
+    <!--<TextView-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:text="@string/no_data"-->
+      <!--android:layout_centerInParent="true"-->
+      <!--android:textColor="@color/opacity_8_white"-->
+      <!--/>-->
+    <ImageView
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_centerInParent="true"
+      android:src="@drawable/vector_no_data"
+      />
+  </RelativeLayout>
 </FrameLayout>

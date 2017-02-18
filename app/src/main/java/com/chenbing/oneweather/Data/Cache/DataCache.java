@@ -4,6 +4,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import android.support.annotation.NonNull;
 
+import com.chenbing.oneweather.Utils.LogUtils;
+
 /**
  * 将数据缓存到内存中。
  */
@@ -15,8 +17,7 @@ public class DataCache {
   }
 
   private void initDatasContainer() {
-    ConcurrentHashMap<String, Object> datas = new ConcurrentHashMap<>();
-    dataMap = datas;
+    dataMap = new ConcurrentHashMap<>();
   }
 
   public static DataCache getInstance() {
@@ -28,7 +29,9 @@ public class DataCache {
   }
 
   public <T> void add(@NonNull String tag, @NonNull T t) {
-    dataMap.put(tag, t);
+    if (t != null){
+      dataMap.put(tag, t);
+    }
   }
 
   /**
@@ -64,6 +67,7 @@ public class DataCache {
     public static final String CITY_LIST = "city_list";
     public static final String LOCALE_WEATHER_DATA = "locale_weather_data";
     public static final String BD_LOCATION = "bd_location";
+    public static final String WEATHER_DATA_SUFFIX = "weather_data_suffix_";
     private Key(){
     }
   }

@@ -52,7 +52,7 @@ public class CityListAdapter extends RecyclerView.Adapter {
   private void listenItemClick(RecyclerView.ViewHolder holder, int position) {
     holder.itemView.setOnClickListener(v -> {
       if (onItemClickListener != null) {
-        onItemClickListener.onItemClick(v, position);
+        onItemClickListener.onItemClick(v, datas.get(position));
       }
     });
   }
@@ -80,7 +80,7 @@ public class CityListAdapter extends RecyclerView.Adapter {
   }
 
   public static interface OnItemClickListener {
-    void onItemClick(View v, int position);
+    void onItemClick(View v, String cityName);
   }
 
   public void updateDatas(List<String> datas){

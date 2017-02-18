@@ -1,8 +1,10 @@
 package com.chenbing.oneweather.Utils;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import rx.Observable;
@@ -18,8 +20,7 @@ import rx.subjects.Subject;
  * @version 邮箱：icechen_@outlook.com
  */
 public class RxBus {
-  private ConcurrentHashMap<Object, ConcurrentHashMap<String, Subject>> subjectManager =
-      new ConcurrentHashMap<>(); // 这是事件队列的管理器
+  private HashMap<Object, ConcurrentHashMap<String, Subject>> subjectManager = new HashMap<>(); // 这是事件队列的管理器
 
   public static RxBus get() {
     return RxBusHolder.instance;
@@ -27,7 +28,6 @@ public class RxBus {
 
   private static class RxBusHolder {
     private static RxBus instance = new RxBus();
-
   }
 
   private RxBus() {}
@@ -62,25 +62,32 @@ public class RxBus {
     if (subjectMap != null) {
       subjectMap.entrySet().stream().forEach(e -> {
         e.getValue().onCompleted();
-        subjectMap.remove(e.getKey());
       });
+      subjectMap.clear();
       subjectManager.remove(context);
       LogUtils.e("移除群组");
     }
+  }
+
+  public <T> void post(@NonNull T content) {
+    postDelay(content, 0);
   }
 
   /**
    * 发送事件
    * 
    * @param content 事件内容，需要有相应的订阅者
+   * @param delay 延迟多上毫秒发送
    */
   @SuppressWarnings("unchecked")
-  public <T> void post(@NonNull T content) {
+  public <T> void postDelay(@NonNull T content, long delay) {
     for (Map.Entry<Object, ConcurrentHashMap<String, Subject>> entry : subjectManager.entrySet()) {
       ConcurrentHashMap<String, Subject> subjectMap = entry.getValue();
       Subject subject = subjectMap.get(content.getClass().getName());
       if (subject != null) {
-        subject.onNext(content);
+        new Handler().postDelayed(() -> {
+          subject.onNext(content);
+        }, delay);
       }
     }
   }

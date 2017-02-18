@@ -4,6 +4,7 @@ import com.baidu.location.BDLocation;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Data.Cache.DataCache;
 import com.chenbing.oneweather.Data.Network.ApiClient;
+import com.chenbing.oneweather.Utils.ToastUtil;
 import com.chenbing.oneweather.Utils.Helpers.LocationHelper;
 
 import android.text.TextUtils;
@@ -32,32 +33,24 @@ public class WeatherDataModel implements WeatherDataModelApi {
         LocationHelper.getInstance().stopLocation();
         String cityname = location.getCity();
         if (!TextUtils.isEmpty(cityname)) {
-          getWeatherData(cityname);
+          getWeatherData(cityname, false);
         }
         DataCache.getInstance().add(DataCache.Key.BD_LOCATION, location); // 缓存定位信息
       });
     } else {
       String cityname = bdLocation.getCity();
       if (!TextUtils.isEmpty(cityname)) {
-        getWeatherData(cityname);
+        getWeatherData(cityname, false);
       }
     }
   }
 
   @Override
   public void requestWeatherData(String cityName) {
-    WeatherData data;
     if (isLocaleCity(cityName)) {
-      data = getCacheData();
-      if (data != null) {
-        if (requestWeatherDataListener != null) {
-          requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
-        }
-      } else {
-        requestWeatherData();
-      }
+      requestLocaleWeatherData();
     } else {
-      getWeatherData(cityName);
+      requestOtherWeatherData(cityName);
     }
   }
 
@@ -68,12 +61,39 @@ public class WeatherDataModel implements WeatherDataModelApi {
         || (bdLocation != null && bdLocation.getCity().contains(cityName));
   }
 
-  private WeatherData getCacheData() {
-    return DataCache.getInstance().get(DataCache.Key.LOCALE_WEATHER_DATA, WeatherData.class);
+  private void requestLocaleWeatherData() {
+    WeatherData data = getCacheData(DataCache.Key.LOCALE_WEATHER_DATA);
+    if (data == null) {
+      requestWeatherData();
+    } else {
+      if (requestWeatherDataListener != null) {
+        requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
+      }
+    }
   }
 
-  private void getWeatherData(String cityname) {
+  private void requestOtherWeatherData(String cityName) {
+    WeatherData data = getCacheData(DataCache.Key.WEATHER_DATA_SUFFIX + cityName);
+    if (data == null) {
+      getWeatherData(cityName, true);
+    } else {
+      if (requestWeatherDataListener != null) {
+        requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
+      }
+    }
+  }
+
+  private WeatherData getCacheData(String key) {
+    return DataCache.getInstance().get(key, WeatherData.class);
+  }
+
+  private void getWeatherData(String cityname, boolean isCache) {
     ApiClient.getWeatherData(cityname, data -> {
+      if (data != null) {
+        if (isCache) {
+          DataCache.getInstance().add(DataCache.Key.WEATHER_DATA_SUFFIX + cityname, data);
+        }
+      }
       if (requestWeatherDataListener != null) {
         requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
       }

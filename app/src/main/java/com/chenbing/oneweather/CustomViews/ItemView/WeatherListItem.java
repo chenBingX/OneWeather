@@ -6,6 +6,7 @@ import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.View.BaseView.BaseRelativeLayout;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -54,9 +55,13 @@ public class WeatherListItem extends BaseRelativeLayout {
       vpContainer.requestLayout();
     }
     tvCityName.setText(data.getCity());
-    tvTemperature.setText(String.format(getContext().getResources().getString(R.string.temperature),
+    if (!TextUtils.isEmpty(data.getTemperature())){
+      tvTemperature.setText(String.format(getContext().getResources().getString(R.string.temperature),
         data.getTemperature()));
+    } else {
+      tvTemperature.setText(R.string.no_data);
+      tvTemperature.setTextSize(16);
+      tvTemperature.setTextColor(getResources().getColor(R.color.opacity_5_white));
+    }
   }
-
-
 }

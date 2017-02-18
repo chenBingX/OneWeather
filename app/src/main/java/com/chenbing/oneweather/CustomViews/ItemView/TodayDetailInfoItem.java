@@ -60,7 +60,7 @@ public class TodayDetailInfoItem extends BaseRelativeLayout {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     String updateTime;
-    if ((long)(data.getRealtime().getDataUptime()) < 1000000000000l){
+    if ((long)(data.getRealtime().getDataUptime()) < 1000000000000L){
       updateTime = dateFormat.format(data.getRealtime().getDataUptime() * 1000);
     } else {
       updateTime = dateFormat.format(data.getRealtime().getDataUptime());
@@ -76,10 +76,17 @@ public class TodayDetailInfoItem extends BaseRelativeLayout {
     String windPower = data.getRealtime().getWind().getPower();
     this.windPower.setText(windPower);
 
-    String airQualityIndex = data.getPm25().getPm25().getCurPm();
+    String airQualityIndex = getResources().getString(R.string.no_data);
+    if (data.getPm25() != null && data.getPm25().getPm25() != null) {
+      airQualityIndex = data.getPm25().getPm25().getCurPm();
+    }
     this.airQualityIndex.setText(airQualityIndex);
 
-    String airQuality = data.getPm25().getPm25().getQuality();
+
+    String airQuality = getResources().getString(R.string.no_data);
+    if (data.getPm25() != null && data.getPm25().getPm25() != null) {
+      airQuality = data.getPm25().getPm25().getQuality();
+    }
     this.airQuality.setText(airQuality);
   }
 }
