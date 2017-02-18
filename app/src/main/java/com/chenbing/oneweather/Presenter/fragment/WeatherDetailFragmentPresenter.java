@@ -1,5 +1,7 @@
 package com.chenbing.oneweather.Presenter.fragment;
 
+import android.support.annotation.NonNull;
+
 import com.chenbing.oneweather.Data.SimpleWeather;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Model.WeatherDataModel;

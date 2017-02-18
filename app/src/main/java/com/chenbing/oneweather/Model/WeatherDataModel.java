@@ -4,8 +4,6 @@ import com.baidu.location.BDLocation;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Data.Cache.DataCache;
 import com.chenbing.oneweather.Data.Network.ApiClient;
-import com.chenbing.oneweather.Utils.GsonUtils;
-import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.Utils.Helpers.LocationHelper;
 
 import android.text.TextUtils;
@@ -26,43 +24,56 @@ public class WeatherDataModel implements WeatherDataModelApi {
   }
 
   private void locationThenGetWeatherData() {
-    LocationHelper.getInstance().startLocation();
-    LocationHelper.getInstance().setListener(location -> {
-      String cityname = location.getCity();
-      if (cityname != null) {
+    BDLocation bdLocation =
+      DataCache.getInstance().get(DataCache.Key.BD_LOCATION, BDLocation.class);
+    if (bdLocation == null){
+      LocationHelper.getInstance().startLocation();
+      LocationHelper.getInstance().setListener(location -> {
+        LocationHelper.getInstance().stopLocation();
+        String cityname = location.getCity();
+        if (!TextUtils.isEmpty(cityname)) {
+          getWeatherData(cityname);
+        }
+        DataCache.getInstance().add(DataCache.Key.BD_LOCATION, location); // 缓存定位信息
+      });
+    } else {
+      String cityname = bdLocation.getCity();
+      if (!TextUtils.isEmpty(cityname)) {
         getWeatherData(cityname);
       }
-      DataCache.getInstance().add(DataCache.Key.BD_LOCATION, location); // 缓存定位信息
-    });
+    }
   }
 
   @Override
   public void requestWeatherData(String cityName) {
     WeatherData data;
-    if (isGetCacheData(cityName)){
-      getCacheData();
+    if (isLocaleCity(cityName)) {
+      data = getCacheData();
+      if (data != null) {
+        if (requestWeatherDataListener != null) {
+          requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
+        }
+      } else {
+        requestWeatherData();
+      }
     } else {
       getWeatherData(cityName);
     }
   }
 
-  private boolean isGetCacheData(String cityName) {
-    return cityName == null || TextUtils.isEmpty(cityName)
-        || DataCache.getInstance().get(DataCache.Key.BD_LOCATION, BDLocation.class).getCity()
-            .contains(cityName);
+  private boolean isLocaleCity(String cityName) {
+    BDLocation bdLocation =
+        DataCache.getInstance().get(DataCache.Key.BD_LOCATION, BDLocation.class);
+    return TextUtils.isEmpty(cityName)
+        || (bdLocation != null && bdLocation.getCity().contains(cityName));
   }
 
-  private void getCacheData() {
-    WeatherData data;
-    data = DataCache.getInstance().get(DataCache.Key.WEATHER_DATA, WeatherData.class);
-    if (requestWeatherDataListener != null) {
-      requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
-    }
+  private WeatherData getCacheData() {
+    return DataCache.getInstance().get(DataCache.Key.LOCALE_WEATHER_DATA, WeatherData.class);
   }
 
   private void getWeatherData(String cityname) {
     ApiClient.getWeatherData(cityname, data -> {
-      LogUtils.i("requestWeatherData: " + GsonUtils.getSingleInstance().toJson(data));
       if (requestWeatherDataListener != null) {
         requestWeatherDataListener.onRequestWeatherDataSuccess(data); // 请求成功
       }

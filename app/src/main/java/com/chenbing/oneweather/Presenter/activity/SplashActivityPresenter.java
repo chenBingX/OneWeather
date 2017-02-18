@@ -36,7 +36,7 @@ public class SplashActivityPresenter
 
   @Override
   public void onRequestWeatherDataSuccess(WeatherData data) {
-    DataCache.getInstance().add(DataCache.Key.WEATHER_DATA, data);  //缓存数据
+    DataCache.getInstance().add(DataCache.Key.LOCALE_WEATHER_DATA, data);  //缓存数据
   }
 
   @Override

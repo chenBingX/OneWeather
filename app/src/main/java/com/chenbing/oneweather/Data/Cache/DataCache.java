@@ -1,15 +1,15 @@
 package com.chenbing.oneweather.Data.Cache;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 /**
  * 将数据缓存到内存中。
  */
 public class DataCache {
-  private WeakReference<ConcurrentHashMap<String, Object>> wrDatas;
+  private ConcurrentHashMap<String, Object> dataMap;
 
   private DataCache() {
     initDatasContainer();
@@ -17,7 +17,7 @@ public class DataCache {
 
   private void initDatasContainer() {
     ConcurrentHashMap<String, Object> datas = new ConcurrentHashMap<>();
-    wrDatas = new WeakReference<>(datas);
+    dataMap = datas;
   }
 
   public static DataCache getInstance() {
@@ -28,12 +28,8 @@ public class DataCache {
     private static final DataCache instance = new DataCache();
   }
 
-  public void add(@NonNull String tag, @NonNull Object object) {
-    if (wrDatas.get() != null) {
-      wrDatas.get().put(tag, object);
-    } else {
-      initDatasContainer();
-    }
+  public <T> void add(@NonNull String tag, @NonNull T t) {
+    dataMap.put(tag, t);
   }
 
   /**
@@ -44,12 +40,8 @@ public class DataCache {
   *
   */
   public <T> T get(@NonNull String tag, @NonNull Class<T> tClass) {
-    if (wrDatas.get() == null) {
-      initDatasContainer();
-    }
-
     T t = null;
-    Object obj = wrDatas.get().get(tag);
+    Object obj = dataMap.get(tag);
     if (obj != null) {
       if (tClass.isInstance(obj)) {
         t = (T) obj;
@@ -58,23 +50,17 @@ public class DataCache {
     return t;
   }
 
-  public void remove(String tag){
-    if (wrDatas.get() == null) {
-      initDatasContainer();
-    }
-    wrDatas.get().remove(tag);
+  public void remove(@NonNull String tag){
+    dataMap.remove(tag);
   }
 
   public void clear(){
-    if (wrDatas.get() == null) {
-      initDatasContainer();
-    }
-    wrDatas.get().clear();
+    dataMap.clear();
   }
 
   public static class Key{
     public static final String CITY_LIST = "city_list";
-    public static final String WEATHER_DATA = "weather_data";
+    public static final String LOCALE_WEATHER_DATA = "locale_weather_data";
     public static final String BD_LOCATION = "bd_location";
     private Key(){
     }
