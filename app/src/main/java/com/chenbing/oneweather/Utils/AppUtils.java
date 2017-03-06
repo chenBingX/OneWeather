@@ -297,8 +297,8 @@ public class AppUtils {
     return packageInfo;
   }
 
-  public static String getSdkVersion() {
-    return String.valueOf(Build.VERSION.SDK_INT);
+  public static int getSdkVersion() {
+    return Build.VERSION.SDK_INT;
   }
 
   public static String getChannelName() {

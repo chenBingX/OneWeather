@@ -8,6 +8,7 @@ import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Data.RxEvent.CityNameEvent;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenter;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenterApi;
+import com.chenbing.oneweather.Utils.AppUtils;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.BaseView.BaseRelativeLayout;
@@ -22,6 +23,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -97,8 +99,12 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
   private void clearSearch() {
     etSearch.setText("");
     etSearch.clearFocus();
+
     tvCancel.setFocusableInTouchMode(true);
     tvCancel.requestFocus();
+
+    AppUtils.hideInputMethod(etSearch);
+
     rvCityList.setVisibility(GONE);
     tvNotFound.setVisibility(GONE);
   }

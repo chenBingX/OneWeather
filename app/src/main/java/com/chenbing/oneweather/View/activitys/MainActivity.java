@@ -10,6 +10,7 @@ import com.chenbing.oneweather.Data.Cache.Config;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.MainActivityPresenterApi;
+import com.chenbing.oneweather.Utils.AppUtils;
 import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 import com.chenbing.oneweather.View.BaseView.BaseFragment;
@@ -117,6 +118,7 @@ public class MainActivity extends BaseActivity implements MainActivityView {
     rvWeatherList.setItemAnimator(new DefaultItemAnimator());
     weatherListAdapter = new WeatherListAdapter(this, simpleWeathers);
     weatherListAdapter.setOnItemClickListener((v, position) -> {
+      AppUtils.hideInputMethod(v);
       showWeatherList(false);
       pagerContainer.setCurrentItem(position);
     });

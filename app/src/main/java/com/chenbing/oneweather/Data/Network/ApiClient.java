@@ -90,7 +90,7 @@ public class ApiClient {
       }
 
     }
-    String sdk = AppUtils.getSdkVersion();
+    String sdk = String.valueOf(AppUtils.getSdkVersion());
     rq.addHeader("cv", sdk);
     LogUtils.e("cv: " + sdk);
 

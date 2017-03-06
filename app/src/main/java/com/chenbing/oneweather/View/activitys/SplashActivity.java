@@ -4,6 +4,7 @@ import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenterApi;
+import com.chenbing.oneweather.Utils.AppUtils;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.Utils.ToastUtil;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
@@ -12,7 +13,6 @@ import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -56,7 +56,7 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
   }
 
   private void requestWeatherData() {
-    if (Build.VERSION.SDK_INT >= 23) {
+    if (AppUtils.getSdkVersion() >= 23) {
       checkPermissionAndRequest();
     } else {
       presenter.requestWeatherData();
