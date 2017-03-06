@@ -1,14 +1,17 @@
 package com.chenbing.oneweather.View.activitys;
 
-import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.R;
+import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenterApi;
 import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -20,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity implements SplashActivityView {
+  private static final int LOCATION_PERMISSION_REQUEST_CODE = 100;
 
   @BindView(R.id.sun)
   ImageView sun;
@@ -47,7 +51,25 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
 
   @Override
   protected void initData() {
-    presenter.requestWeatherData();
+    requestWeatherData();
+  }
+
+  private void requestWeatherData() {
+    if (Build.VERSION.SDK_INT >= 23) {
+      if (checkLocationPermissions()) {
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
+        requestPermissions(permissions, LOCATION_PERMISSION_REQUEST_CODE);
+      } else {
+        presenter.requestWeatherData();
+      }
+    } else {
+      presenter.requestWeatherData();
+    }
+  }
+
+  private boolean checkLocationPermissions() {
+    return checkSelfPermission(
+        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
   }
 
   @Override
@@ -161,4 +183,22 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
     finish();
   }
 
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode) {
+      // requestCode即所声明的权限获取码，在checkSelfPermission时传入
+      case LOCATION_PERMISSION_REQUEST_CODE:
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          presenter.requestWeatherData();
+          // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
+        } else {
+          // 没有获取到权限，做特殊处理
+        }
+        break;
+      default:
+        break;
+    }
+  }
 }

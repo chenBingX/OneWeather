@@ -56,7 +56,9 @@ public class WeatherListAdapter extends RecyclerView.Adapter{
         }
       });
     } else if (getItemViewType(position) == ITEM_FOOT){
-      
+      if (position == 0){
+        ((WeatherListItemFooter)holder.itemView).setPosition(position);
+      }
     }
   }
 

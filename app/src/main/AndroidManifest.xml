@@ -25,13 +25,18 @@
 
     <meta-data
       android:name="com.baidu.lbsapi.API_KEY"
-      android:value="c237R8mwqGO0ELPyTPdOiI43fizK4sYA"/>       <!--key:开发者申请的Key-->
+      android:value="mGGTV3PSLwzL8FStNimo6HgGyEHCL48i"/>       <!--key:开发者申请的Key-->
 
     <!--Activity-->
-    <activity android:name=".View.activitys.MainActivity">
+    <activity
+      android:name=".View.activitys.MainActivity"
+      android:screenOrientation="portrait"
+      >
     </activity>
     <activity android:name=".View.activitys.SplashActivity"
-      android:theme="@style/FullScreen">
+              android:screenOrientation="portrait"
+              android:theme="@style/FullScreen"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

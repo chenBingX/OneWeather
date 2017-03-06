@@ -8,6 +8,7 @@ import com.chenbing.oneweather.R;
 import com.chenbing.oneweather.Data.RxEvent.CityNameEvent;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenter;
 import com.chenbing.oneweather.Presenter.View.WeatherListItemFooterPresenterApi;
+import com.chenbing.oneweather.Utils.DisplayUtils;
 import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.BaseView.BaseRelativeLayout;
 import com.chenbing.oneweather.adapters.CityListAdapter;
@@ -127,5 +128,14 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
         tvNotFound.setVisibility(VISIBLE);
       }
     });
+  }
+
+  public void setPosition(int position) {
+    int padding = vpRoot.getPaddingLeft();
+    if (position == 0) {
+      vpRoot.setPadding(padding, DisplayUtils.dipToPx(30), padding, padding);
+    } else {
+      vpRoot.setPadding(padding, padding, padding, padding);
+    }
   }
 }

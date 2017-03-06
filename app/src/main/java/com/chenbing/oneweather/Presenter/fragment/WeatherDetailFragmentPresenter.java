@@ -4,6 +4,7 @@ import com.chenbing.oneweather.Data.SimpleWeather;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Model.WeatherDataModel;
 import com.chenbing.oneweather.Model.WeatherDataModelApi;
+import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.fragments.WeatherDetailFragmentView;
 
@@ -48,7 +49,7 @@ public class WeatherDetailFragmentPresenter implements WeatherDetailFragmentPres
 
   @Override
   public void onRequestWeatherDataFailure(String message) {
-
+    LogUtils.e(": " + message);
   }
 
   @Override

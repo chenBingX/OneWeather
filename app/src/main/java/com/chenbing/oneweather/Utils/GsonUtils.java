@@ -29,4 +29,8 @@ public class GsonUtils {
   public static Gson newInstance(){
     return new Gson();
   }
+
+  public static String toJson(Object obj){
+    return getSingleInstance().toJson(obj);
+  }
 }

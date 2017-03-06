@@ -1,6 +1,7 @@
 package com.chenbing.oneweather.Utils;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -60,9 +61,12 @@ public class RxBus {
   public void unregister(@NonNull Object context) {
     ConcurrentHashMap<String, Subject> subjectMap = subjectManager.get(context);
     if (subjectMap != null) {
-      subjectMap.entrySet().stream().forEach(e -> {
-        e.getValue().onCompleted();
-      });
+      for (Map.Entry<String, Subject> stringSubjectEntry : subjectMap.entrySet()) {
+        stringSubjectEntry.getValue().onCompleted();
+      }
+      // subjectMap.entrySet().stream().forEach(e -> {
+      // e.getValue().onCompleted();
+      // });
       subjectMap.clear();
       subjectManager.remove(context);
       LogUtils.e("移除群组");

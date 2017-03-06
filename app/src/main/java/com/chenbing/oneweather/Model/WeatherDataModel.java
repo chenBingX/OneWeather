@@ -4,6 +4,8 @@ import com.baidu.location.BDLocation;
 import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Data.Cache.DataCache;
 import com.chenbing.oneweather.Data.Network.ApiClient;
+import com.chenbing.oneweather.Utils.GsonUtils;
+import com.chenbing.oneweather.Utils.LogUtils;
 import com.chenbing.oneweather.Utils.ToastUtil;
 import com.chenbing.oneweather.Utils.Helpers.LocationHelper;
 
@@ -36,6 +38,7 @@ public class WeatherDataModel implements WeatherDataModelApi {
           getWeatherData(cityname, false);
         }
         DataCache.getInstance().add(DataCache.Key.BD_LOCATION, location); // 缓存定位信息
+        LogUtils.e("定位成功--" + GsonUtils.toJson(location));
       });
     } else {
       String cityname = bdLocation.getCity();
@@ -58,7 +61,7 @@ public class WeatherDataModel implements WeatherDataModelApi {
     BDLocation bdLocation =
         DataCache.getInstance().get(DataCache.Key.BD_LOCATION, BDLocation.class);
     return TextUtils.isEmpty(cityName)
-        || (bdLocation != null && bdLocation.getCity().contains(cityName));
+        || (bdLocation != null && bdLocation.getCity() != null && bdLocation.getCity().contains(cityName));
   }
 
   private void requestLocaleWeatherData() {
