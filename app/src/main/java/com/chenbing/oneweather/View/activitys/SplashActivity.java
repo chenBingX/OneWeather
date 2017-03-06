@@ -5,6 +5,7 @@ import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenter;
 import com.chenbing.oneweather.Presenter.activity.SplashActivityPresenterApi;
 import com.chenbing.oneweather.Utils.DisplayUtils;
+import com.chenbing.oneweather.Utils.ToastUtil;
 import com.chenbing.oneweather.View.BaseView.BaseActivity;
 
 import android.Manifest;
@@ -56,12 +57,16 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
 
   private void requestWeatherData() {
     if (Build.VERSION.SDK_INT >= 23) {
-      if (checkLocationPermissions()) {
-        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
-        requestPermissions(permissions, LOCATION_PERMISSION_REQUEST_CODE);
-      } else {
-        presenter.requestWeatherData();
-      }
+      checkPermissionAndRequest();
+    } else {
+      presenter.requestWeatherData();
+    }
+  }
+
+  private void checkPermissionAndRequest() {
+    if (checkLocationPermissions()) {
+      String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
+      requestPermissions(permissions, LOCATION_PERMISSION_REQUEST_CODE);
     } else {
       presenter.requestWeatherData();
     }
@@ -184,17 +189,15 @@ public class SplashActivity extends BaseActivity implements SplashActivityView {
   }
 
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      int[] grantResults) {
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     switch (requestCode) {
       // requestCode即所声明的权限获取码，在checkSelfPermission时传入
       case LOCATION_PERMISSION_REQUEST_CODE:
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
           presenter.requestWeatherData();
-          // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
         } else {
-          // 没有获取到权限，做特殊处理
+          ToastUtil.showShortToast("定位服务需要打开定位权限才能正常使用！");
         }
         break;
       default:

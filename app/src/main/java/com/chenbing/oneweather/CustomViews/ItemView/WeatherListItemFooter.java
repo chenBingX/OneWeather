@@ -97,6 +97,8 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
   private void clearSearch() {
     etSearch.setText("");
     etSearch.clearFocus();
+    tvCancel.setFocusableInTouchMode(true);
+    tvCancel.requestFocus();
     rvCityList.setVisibility(GONE);
     tvNotFound.setVisibility(GONE);
   }
