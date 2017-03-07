@@ -1,9 +1,5 @@
 package com.chenbing.oneweather.Model;
 
-import com.chenbing.oneweather.Data.City;
-
-import java.util.List;
-
 /**
  * Project Name:OneWeather
  * Author:CoorChice

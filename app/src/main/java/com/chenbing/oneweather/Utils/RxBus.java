@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import rx.Observable;
@@ -89,7 +90,7 @@ public class RxBus {
       ConcurrentHashMap<String, Subject> subjectMap = entry.getValue();
       Subject subject = subjectMap.get(content.getClass().getName());
       if (subject != null) {
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
           subject.onNext(content);
         }, delay);
       }
