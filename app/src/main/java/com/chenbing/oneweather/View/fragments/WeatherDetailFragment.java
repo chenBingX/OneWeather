@@ -5,7 +5,6 @@ import com.chenbing.oneweather.Data.WeatherData;
 import com.chenbing.oneweather.Presenter.BasePresenter;
 import com.chenbing.oneweather.Presenter.fragment.WeatherDetailFragmentPresenter;
 import com.chenbing.oneweather.Presenter.fragment.WeatherDetailFragmentPresenterApi;
-import com.chenbing.oneweather.Utils.RxBus;
 import com.chenbing.oneweather.View.BaseView.BaseFragment;
 import com.chenbing.oneweather.adapters.FutureWeathersAdapter;
 
@@ -87,8 +86,10 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
 
   @Override
   protected void initView() {
+    LinearLayoutManager layoutManager =
+        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     recyclerView.setLayoutManager(
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        layoutManager);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
   }
 
@@ -156,7 +157,7 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
     this.weatherInfo.setText(weatherInfo);
 
     String airQualityStrFormat = getString(R.string.air_quality);
-    String airQuality = "暂无数据";
+    String airQuality = getString(R.string.no_data);
     if (data.getPm25() != null && data.getPm25().getPm25() != null) {
       airQuality = String.format(airQualityStrFormat, data.getPm25().getPm25().getQuality());
     }

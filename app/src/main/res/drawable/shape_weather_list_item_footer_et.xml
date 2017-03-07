@@ -3,8 +3,6 @@
   android:shape="rectangle"
   >
   <corners android:radius="5dp"/>
-  <size android:width="1000dp"
-        android:height="30dp"/>
   <solid android:color="@color/opacity_5_black"/>
 
 </shape>

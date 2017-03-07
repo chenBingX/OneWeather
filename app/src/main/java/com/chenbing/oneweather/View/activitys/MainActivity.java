@@ -113,8 +113,10 @@ public class MainActivity extends BaseActivity implements MainActivityView {
   }
 
   private void initWeatherList() {
+    LinearLayoutManager layoutManager =
+        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
     rvWeatherList
-        .setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        .setLayoutManager(layoutManager);
     rvWeatherList.setItemAnimator(new DefaultItemAnimator());
     weatherListAdapter = new WeatherListAdapter(this, simpleWeathers);
     weatherListAdapter.setOnItemClickListener((v, position) -> {

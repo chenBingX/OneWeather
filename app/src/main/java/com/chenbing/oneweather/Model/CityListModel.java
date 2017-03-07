@@ -48,8 +48,11 @@ public class CityListModel implements CityListModelApi {
             inputStream.read(bytes);
             inputStream.close();
             String string = new String(bytes);
+
             Type type = new TypeToken<List<City>>() {}.getType();
             cityList = GsonUtils.getSingleInstance().fromJson(string, type);
+            DataCache.getInstance().add(DataCache.Key.CITY_LIST, cityList);
+
             subscriber.onNext(cityList);
             subscriber.onCompleted();
           } catch (IOException e) {
@@ -82,7 +85,6 @@ public class CityListModel implements CityListModelApi {
 
         @Override
           public void onNext(List<City> cityList) {
-            DataCache.getInstance().add(DataCache.Key.CITY_LIST, cityList);
             if (onCityListLoadedListener != null) {
               onCityListLoadedListener.onCityListLoaded(cityList);
             }
@@ -132,7 +134,7 @@ public class CityListModel implements CityListModelApi {
     loadCityList();
   }
 
-  public void setOnCityListLoadedListener(OnCityListLoadedListener onCityListLoadedListener) {
+  private void setOnCityListLoadedListener(OnCityListLoadedListener onCityListLoadedListener) {
     this.onCityListLoadedListener = onCityListLoadedListener;
   }
 

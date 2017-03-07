@@ -23,13 +23,12 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
 
-public class WeatherListItemFooter extends BaseRelativeLayout {
+public class WeatherListItemFooter extends BaseRelativeLayout implements WeatherListItemFooterView {
   @BindView(R.id.root)
   ViewGroup vpRoot;
   @BindView(R.id.search)
@@ -45,6 +44,7 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
   private List<String> datas = new ArrayList<>();
   private CityListAdapter cityListAdapter;
   private WeatherListItemFooterPresenterApi presenter;
+  private String currentMatchContent;
 
 
   public WeatherListItemFooter(Context context) {
@@ -114,26 +114,14 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
       @Override
       public void afterTextChanged(Editable s) {
         if (!TextUtils.isEmpty(s.toString())) {
-          tryToMatchCity(s.toString());
+          currentMatchContent = s.toString();
+          presenter.matchCity(s.toString());
         } else {
+          currentMatchContent = "";
           cityListAdapter.updateDatas(Collections.emptyList());
           rvCityList.setVisibility(GONE);
           tvNotFound.setVisibility(GONE);
         }
-      }
-    });
-  }
-
-  private void tryToMatchCity(String s) {
-    presenter.matchCity(s, cities -> {
-      if (!cities.isEmpty()) {
-        cityListAdapter.setMatchContent(s);
-        cityListAdapter.updateDatas(cities);
-        rvCityList.setVisibility(VISIBLE);
-        tvNotFound.setVisibility(GONE);
-      } else {
-        rvCityList.setVisibility(GONE);
-        tvNotFound.setVisibility(VISIBLE);
       }
     });
   }
@@ -144,6 +132,19 @@ public class WeatherListItemFooter extends BaseRelativeLayout {
       vpRoot.setPadding(padding, DisplayUtils.dipToPx(30), padding, padding);
     } else {
       vpRoot.setPadding(padding, padding, padding, padding);
+    }
+  }
+
+  @Override
+  public void onMatched(List<String> cities) {
+    if (!cities.isEmpty()) {
+      cityListAdapter.setMatchContent(currentMatchContent);
+      cityListAdapter.updateDatas(cities);
+      rvCityList.setVisibility(VISIBLE);
+      tvNotFound.setVisibility(GONE);
+    } else {
+      rvCityList.setVisibility(GONE);
+      tvNotFound.setVisibility(VISIBLE);
     }
   }
 }

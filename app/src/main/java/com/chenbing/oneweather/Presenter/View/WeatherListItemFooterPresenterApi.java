@@ -12,5 +12,5 @@ import com.chenbing.oneweather.Presenter.BasePresenter;
 
 public interface WeatherListItemFooterPresenterApi extends BasePresenter {
 
-  void matchCity(String content, CityListModel.OnMatchedListener listener);
+  void matchCity(String content);
 }
