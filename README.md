@@ -11,14 +11,12 @@ Retrofit2 + OkHttp3构建网络请求、Fresco、Gson、RxJava异步技术、Lam
 你的鼓励是我最大动力！😘  
 
 我在同时在简书维护了本项目的相关博客，感兴趣的话可以打开链接阅读。  
-[本项目系列文章列表](http://www.jianshu.com/nb/8017443)  
+# [本项目系列文章列表](http://www.jianshu.com/nb/8017443)
 到简书记得加个关注哦！  
 
 ## 应用截图
-![效果图](http://upload-images.jianshu.io/upload_images/1869462-7e165bebd914de59.gif?imageMogr2/auto-orient/strip)  
+![效果图](http://upload-images.jianshu.io/upload_images/1869462-7e165bebd914de59.gif?imageMogr2/auto-orient/strip)
 
+![效果图](http://upload-images.jianshu.io/upload_images/1869462-11a86ab10231723b.gif?imageMogr2/auto-orient/strip)
 
-![效果图](http://upload-images.jianshu.io/upload_images/1869462-11a86ab10231723b.gif?imageMogr2/auto-orient/strip)   
-
-
-![效果图](http://ogemdlrap.bkt.clouddn.com/%E7%AE%80%E8%A6%81%E5%A4%A9%E6%B0%94%E5%88%97%E8%A1%A8.gif)    
+![效果图](http://ogemdlrap.bkt.clouddn.com/%E7%AE%80%E8%A6%81%E5%A4%A9%E6%B0%94%E5%88%97%E8%A1%A8.gif)
