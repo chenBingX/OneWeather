@@ -13,8 +13,6 @@ import java.util.List;
 
 public interface CityListModelApi {
 
-  void loadCityList();
-
   void matchCity(String content);
 
   void setOnMatchedListener(CityListModel.OnMatchedListener onMatchedListener);
